@@ -17,5 +17,8 @@
 !/log/.keep
 !/tmp/.keep
 
+#Ignore apikey
+/API_KEY
+
 # Ignore Byebug command history file.
 .byebug_history

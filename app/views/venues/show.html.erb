@@ -1,0 +1,59 @@
+<h1>Venue</h1>
+<p>
+  <strong>Name:</strong>
+  <%= @venue.vname %>
+</p>
+ 
+<p>
+  <strong>Address:</strong>
+  <%= @venue.address %>
+</p>
+<p>
+  <strong>City:</strong>
+  <%= @venue.city %>
+</p>
+ 
+<p>
+  <strong>Country:</strong>
+  <%= @venue.country %>
+</p>
+
+<!-- Embedded Google Map -->
+<iframe
+  width="400"
+  height="300"
+  frameborder="0" style="border:0"
+  src="https://www.google.com/maps/embed/v1/place?key=<%= Tesi::Application.config.api_key %>
+    &q=<%= @venue.address %>,<%= @venue.city %>,<%= @venue.country %>" allowfullscreen>
+</iframe>
+
+
+<h2>Concerts held here</h2>
+  <table>
+  <tr>
+    <th>Performers</th>
+    <th>Date</th>
+    <th colspan="1"></th>
+  </tr>
+  <% @venue.concerts.each do |concert| %>
+    <tr>
+      <td>
+        <table>
+          <% concert.performers.each do |perf| %>
+          <tr>
+          <td><%= perf.pname %> </td>
+          </tr>
+          <% end %>
+        </table>
+      </td>
+      <td><%= concert.date %></td>
+      <td><%#= link_to "Concert", concert_path(concert) %></td>
+    </tr>  
+  <% end %>
+</table>
+
+
+<%= link_to 'Edit', edit_venue_path(@venue) %> |
+<%= link_to 'Add another venue', new_venue_path %> |
+<%= link_to 'Concert index', concerts_path %> |
+<%= link_to 'Back', venues_path %>

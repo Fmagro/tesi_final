@@ -1,3 +1,43 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  get 'admin/index'
+
+  get 'welcome/index'
+  root 'welcome#index'
+  
+  resources :concerts do
+
+    resources :performances do
+      member do
+        get 'manageperformer'
+        patch 'addperformer'
+      end
+    end      
+    member do
+      patch 'manageartist'
+      patch 'managevenue'
+    end
+    collection do
+      get 'concertsearch'
+      get 'concertfilter'
+    end
+  end
+
+
+  resources :songs do
+    collection do
+      get 'songfilter'
+      get 'songsearch'
+    end
+  end
+
+  resources :performers 
+
+  resources :individuals, :controller => "performers", :type => "Individual"
+  resources :groups, :controller => "performers", :type => "Group" do
+    resources :bands
+  end
+
+  resources :venues
+  
+ 
 end
