@@ -2,5 +2,5 @@ class Group < Performer
   has_many :bands, dependent: :destroy, inverse_of: :group
   
   has_many :individuals, :through => :bands
-  #accepts_nested_attributes_for :ensembles
+  accepts_nested_attributes_for :bands
 end

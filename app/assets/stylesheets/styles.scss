@@ -1,0 +1,140 @@
+// Place all the styles related to the common styles  here.
+
+body {
+/*    background-image: url('/assets/concert_home.jpeg');
+    background-size: cover;    
+    background-color: #494a4f;*/
+    margin: 0;
+    padding: 0;
+}
+
+div.container {
+    width: 100%;
+/*    border: 2px solid #273a61;*/
+}
+
+header {
+    padding: 1em;
+    height: 10vh;
+    color: #B47746;
+    background-color: #273a61;
+    clear: left;
+    text-align: center;
+    text-shadow: 2px 2px 4px black;
+}
+
+footer {
+    padding: 1em;
+    height: 2.7vh;
+    color: #B47746;
+    background-color: #273a61;
+    clear: left;
+    text-align: center;
+    text-shadow: 1px 1px 2px black;
+
+}
+nav {
+/*    height: 4vh;*/
+}
+
+nav ul {
+    height: 6vh;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #B47746;
+    border: 1px solid #494a4f;
+}
+
+nav li {
+    float: left;
+    border-right:1px solid #494a4f;
+}
+
+nav li:last-child {
+    float:right
+    
+
+}
+
+nav li a {
+    display: block;
+    color: #273a61;
+    text-align: center;
+/*    text-shadow: 1px 1px  black;*/
+    padding: 0.6em 1em;
+    text-decoration: none;
+}
+
+nav li a:hover:not(.active) {
+    background-color: #273a61;
+    color: #e79826;
+}
+
+nav.active {
+    background-color: #273a61;
+}
+
+.content {
+/*  min-height: -webkit-calc(100vh - 255px);     
+    min-height: -moz-calc(100vh - 255px);    
+    min-height: calc(100vh - 255px);
+    background-image: url('/assets/concert_home.jpeg');
+    background-size: cover;
+    background-color:rgba(255,255,255,0.5);*/
+    min-height: 66vh; 
+    padding: 1em;
+    overflow: auto;
+}
+
+.infosection {
+/*    display: inline-block;
+    border: 1px solid #273a61;
+    width: 40vw;
+    min-height: 20vh;
+    background-color: #e4ebf6;*/
+    float: left;
+    margin: 0.8em;
+    min-width: 42vw;
+    padding: 0.8em;
+    min-height: 10em;
+    border: 1px solid #273a61;
+    box-shadow:10px 10px 5px grey;
+
+}
+
+.afterinfosection {
+    clear: left;
+    margin-top: 0.5em;
+}
+
+.iframesection {
+/*    display: inline-block;
+    border: 1px solid #273a61;
+    width: 40vw;
+    min-height: 20vh;
+    background-color: #e4ebf6;*/
+    float: left;
+    padding: 0.8em;    
+    min-width: 42vw;
+    
+    min-height: 10em;
+    
+}
+
+#error_explanation{
+    display: inline-block;
+    border: 3px solid #FF0004;
+    width: 40vw;
+    min-height: 20vh;
+    background-color: #e4ebf6;
+    float: left;
+    padding: 0.8em;    
+    min-width: 42vw;
+    
+    min-height: 10em;
+    
+}
+
+

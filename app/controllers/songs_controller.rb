@@ -1,5 +1,5 @@
 class SongsController < ApplicationController
-    http_basic_authenticate_with name:  Tesi::Application.config.usrname, password: Tesi::Application.config.pwd, except: [:show, :songfilter, :songsearch]
+    http_basic_authenticate_with name:  "admin", password: "12345", except: [:show, :songfilter, :songsearch]
   def index
     @songs = Song.all
   end

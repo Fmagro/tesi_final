@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Manythrough</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application_w', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+
+    <div class="container">
+
+    <header>
+      <h1>Relive your concert</h1>
+    </header>
+
+    <nav>
+      <ul>
+        <li><%= link_to 'Home', welcome_index_path %></li>
+ 
+        <li><%= link_to 'Concert', concertfilter_concerts_path %></li>
+        <li><%= link_to 'Song', songs_path %></li>
+        <li><%= link_to 'Performer', performers_path %></li>
+        <li><%= link_to 'Venue', venues_path %></li>
+        <li><%= link_to 'Admin area', admin_index_path %></li>
+      </ul>
+    </nav>
+
+    <div class="content"> 
+      <%= yield %>
+    </div> 
+
+    <footer>Copyright &copy; F. Magro</footer>
+
+    </div>
+  </body>
+</html>

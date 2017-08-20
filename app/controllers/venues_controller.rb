@@ -1,8 +1,6 @@
 class VenuesController < ApplicationController
 
-
-
-  http_basic_authenticate_with name: Tesi::Application.config.usrname.to_s, password: Tesi::Application.config.pwd.to_s, except: [:show]
+  http_basic_authenticate_with name: "admin", password: "12345", except: [:show]
   def index
     @venues = Venue.all
   end

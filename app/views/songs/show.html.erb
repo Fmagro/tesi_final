@@ -1,0 +1,79 @@
+<h1> Song </h1>
+
+
+<div class="infosection" >
+  <p>
+    <strong>Title:</strong>
+    <%= @song.title %>
+  </p>
+ 
+  <p>
+    <strong>Genre:</strong>
+    <%= @song.genre %>
+  </p>
+</div> 
+
+<!-- If a youtube id has been given then it embeds the appropriate video width 480 height 270 -->
+<% if @song.ytid.present?%> 
+  <div class="iframesection" >
+    <iframe id="player" type="text/html" width="480" height="270"src="http://www.youtube.com/embed/<%= @song.ytid %>?enablejsapi=1&origin=http://example.com"
+  frameborder="0"></iframe> 
+  
+    <br>
+  </div>
+<% end %>
+
+<div class="infosection" >
+<h2>Artists performing this song: </h2>
+  <table>
+  <tr>
+    <th>Name</th>
+
+  </tr>
+  <% @song.performances.each do |performance| %>
+    <% performance.performers.each do |performer| %>
+    <tr>
+      <td><%= link_to performer.pname, performer_path(performer) %></td>
+
+    </tr> 
+    <% end %> 
+  <% end %>
+  </table>
+</div>
+
+<div class="infosection" >
+<h2>Concerts where this </h2>
+<h2>song was performed: </h2>
+  <table>
+    <tr>  
+      <th>Performers</th>  
+      <th>Date</th> 
+      <th>Venue</th>    
+      <th colspan="1"></th> 
+    </tr>
+    <% @song.performances.each do |performance| %>
+    <tr>  
+      <td>
+        <table>
+          <% performance.concert.performers.each do |p| %>
+            <tr>  <td> <%= p.pname %> </td> </tr> 
+          <% end %>
+        </table> 
+      </td> 
+      <td> <%= performance.concert.date %> </td>
+      <td> <%= performance.concert.venue.vname %> </td>
+      <td><%= link_to "Concert", concert_path(performance.concert) %></td> 
+    </tr>  
+    <% end %>
+  </table>
+  <br>
+</div>
+
+
+
+<div class="afterinfosection" >
+<%= link_to 'Edit', edit_song_path(@song) %> |
+<%= link_to 'Add another song', new_song_path %> |
+<%= link_to 'Concert index', concerts_path %> |
+<%= link_to 'Back', songs_path %>
+</div>

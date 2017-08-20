@@ -30,7 +30,11 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :performers 
+  resources :performers do
+    member do
+      get 'managelink'
+    end
+  end
 
   resources :individuals, :controller => "performers", :type => "Individual"
   resources :groups, :controller => "performers", :type => "Group" do

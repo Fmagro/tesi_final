@@ -1,0 +1,32 @@
+<h1>Listing Concerts</h1>
+<%= link_to 'New concert', new_concert_path %>
+<table>
+  <tr>
+    <th>Performers</th>
+    <th>Date</th>
+    <th>Venue</th>
+    <th colspan="4"></th>
+  </tr>
+ 
+  <% @concerts.each do |concert| %>
+    <tr>
+      <td>
+        <table>
+          <% concert.performers.each do |p| %>
+            <tr>  <td> <%= p.pname %> </td> </tr> 
+          <% end %>
+        </table> 
+      </td>
+      <td><%= concert.date %></td>      
+      <td><%= concert.venue.vname %></td>
+      <td><%= link_to 'Show', concert_path(concert) %></td>
+      <td><%= link_to 'Edit', edit_concert_path(concert) %></td>
+      <td><%= link_to 'Manage link', managelink_concert_path(concert) %></td>
+      <td><%= link_to 'Destroy', concert_path(concert),
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+</table>
+<%= link_to 'Search for concerts ', concertfilter_concerts_path %> 
+
