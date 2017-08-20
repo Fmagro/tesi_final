@@ -5,7 +5,7 @@
   <tr>
     <th>Performers</th>
     <th>Date</th>
-    <th colspan="1"></th>
+    <th colspan="2"></th>
   </tr>
   <% @venue.concerts.each do |concert| %>
     <tr>
@@ -19,10 +19,13 @@
         </table>
       </td>
       <td><%= concert.date %></td>
-      <td><%#= link_to "Concert", concert_path(concert) %></td>
+      <td><%= link_to "Show", concert_path(concert) %></td>
+      <td><%#= link_to "Manage link", manage_link_concert_path(concert) %></td>
     </tr>  
   <% end %>
 </table>
 
-
-
+<%= link_to 'Edit', edit_venue_path(@venue) %> |
+<%= link_to 'Add another venue', new_venue_path %> |
+<%= link_to 'Concert index', concerts_path %> |
+<%= link_to 'Back', venues_path %>

@@ -43,6 +43,10 @@ class VenuesController < ApplicationController
  
     redirect_to venues_path
   end
+
+  def managelink
+    @venue = Venue.find(params[:id]) 
+  end
  
   private
     def venue_params

@@ -43,6 +43,10 @@ class SongsController < ApplicationController
     redirect_to songs_path
   end
 
+  def managelink
+    @song = Song.find(params[:id])
+  end
+
   def songfilter
     @songs = Song.all 
   end

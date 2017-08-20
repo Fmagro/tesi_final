@@ -28,6 +28,9 @@ Rails.application.routes.draw do
       get 'songfilter'
       get 'songsearch'
     end
+    member do
+      get 'managelink'
+    end
   end
 
   resources :performers do
@@ -41,7 +44,11 @@ Rails.application.routes.draw do
     resources :bands
   end
 
-  resources :venues
+  resources :venues do
+    member do
+      get 'managelink'
+    end
+  end 
   
  
 end

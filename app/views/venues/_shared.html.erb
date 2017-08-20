@@ -1,0 +1,29 @@
+<h1>Venue</h1>
+<p>
+  <strong>Name:</strong>
+  <%= @venue.vname %>
+</p>
+ 
+<p>
+  <strong>Address:</strong>
+  <%= @venue.address %>
+</p>
+<p>
+  <strong>City:</strong>
+  <%= @venue.city %>
+</p>
+ 
+<p>
+  <strong>Country:</strong>
+  <%= @venue.country %>
+</p>
+
+<!-- Embedded Google Map -->
+<iframe
+  width="400"
+  height="300"
+  frameborder="0" style="border:0"
+  src="https://www.google.com/maps/embed/v1/place?key=<%= Tesi::Application.config.api_key %>
+    &q=<%= @venue.address %>,<%= @venue.city %>,<%= @venue.country %>" allowfullscreen>
+</iframe>
+
