@@ -63,7 +63,7 @@ class PerformersController < ApplicationController
     end
 
     def perf_params
-      params.require(perf_req).permit(:pname, :bio, :type, bands_attributes: [:id, :performer_id, :joining, :leaving])
+      params.require(perf_req).permit(:pname, :bio, :type, bands_attributes: [:id, :group_id, :individual_id, :joining, :leaving])
 #params.require(params[:type].to_sym).permit(:pname, :bio)
     end
 end
