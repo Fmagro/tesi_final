@@ -13,6 +13,7 @@ Rails.application.routes.draw do
       end
     end      
     member do
+      get 'managelink'
       patch 'manageartist'
       patch 'managevenue'
     end

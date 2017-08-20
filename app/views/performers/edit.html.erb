@@ -3,7 +3,7 @@
 <%= form_for @performer do |f| %>
  
   <%= render 'errors'%>
- 
+  <div class="infosection"> 
   <%= render 'performerinfo', f: f %>
 
   <% if @performer.type == 'Group' %>
@@ -24,7 +24,8 @@
   <p>
     <%= f.submit %>
   </p>
-
+  </div>
 <% end %> 
-
-<%= link_to 'Back', performers_path %>
+<div class="afterinfosection">
+<%= link_to 'Performer Index', performers_path %>
+</div>

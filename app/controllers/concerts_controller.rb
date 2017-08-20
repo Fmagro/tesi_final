@@ -1,5 +1,5 @@
 class ConcertsController < ApplicationController
-    http_basic_authenticate_with name:  Tesi::Application.config.usrname, password: Tesi::Application.config.pwd, except: [:show, :concertfilter, :concertsearch]
+    http_basic_authenticate_with name:  "admin", password: "12345", except: [:show, :concertfilter, :concertsearch]
 
   def index
     @concerts = Concert.all
@@ -44,6 +44,10 @@ class ConcertsController < ApplicationController
     @concert.destroy
  
     redirect_to concerts_path
+  end
+ 
+  def managelink
+    @concert = Concert.find(params[:id])
   end
 
 

@@ -1,5 +1,5 @@
 <%= render 'shared', shared: @venue %>
-
+<div class="infosection">
 <h2>Concerts held here</h2>
   <table>
   <tr>
@@ -24,8 +24,11 @@
     </tr>  
   <% end %>
 </table>
+</div>
 
+<div class="afterinfosection">
 <%= link_to 'Edit', edit_venue_path(@venue) %> |
 <%= link_to 'Add another venue', new_venue_path %> |
 <%= link_to 'Concert index', concerts_path %> |
 <%= link_to 'Back', venues_path %>
+</div>

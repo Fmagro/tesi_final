@@ -1,9 +1,11 @@
 <h1>New performer</h1>
 
+
 <%= form_for @performer do |f| %>
- 
+   
   <%= render 'errors'%>
- 
+  
+  <div class="infosection">
   <%= render 'performerinfo', f: f %>
 
   <% if @performer.type == "Group" %>
@@ -27,8 +29,10 @@
   <p>
     <%= f.submit %>
   </p>
+  </div>
 
 
 <% end %>
-
+<div class="afterinfosection">
 <%= link_to 'Performer index', performers_path %>
+</div>

@@ -1,4 +1,5 @@
 <h1>Venue</h1>
+<div class="infosection">
 <p>
   <strong>Name:</strong>
   <%= @venue.vname %>
@@ -17,13 +18,16 @@
   <strong>Country:</strong>
   <%= @venue.country %>
 </p>
+</div>
+
 
 <!-- Embedded Google Map -->
-<iframe
+<iframe class="iframesection"
   width="400"
   height="300"
   frameborder="0" style="border:0"
   src="https://www.google.com/maps/embed/v1/place?key=<%= Tesi::Application.config.api_key %>
     &q=<%= @venue.address %>,<%= @venue.city %>,<%= @venue.country %>" allowfullscreen>
 </iframe>
+
 
