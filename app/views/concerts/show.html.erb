@@ -3,13 +3,13 @@
 <div class="infosection">
   <p>
     <strong>Date:</strong>
-    <%= @concert.date %>
+    <%= @concert.cdate %>
   </p>
 </div>
 
 <div class="infosection">
   <h2>Venue: </h2>
-  <td><%= link_to @concert.venue.name,  venue_path(@concert.venue) %></td>
+  <td><%= link_to @concert.venue.vname,  venue_path(@concert.venue) %></td>
 
   <%= form_for @concert, url: managevenue_concert_path(@concert) do |f| %>
 
@@ -18,7 +18,7 @@
     </p>
   
     <p>
-    <%= select_tag "venue_to_add", options_from_collection_for_select(Venue.all, "id" , "name") %>
+    <%= select_tag "venue_to_add", options_from_collection_for_select(Venue.all, "id" , "vname") %>
     <%= label_tag("Add this association") %><br>
     </p>
 

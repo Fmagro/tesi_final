@@ -1,0 +1,26 @@
+<h1>Add or remove a performer to the performance</h1>
+
+<%= form_for @performance, url: addperformer_concert_performance_path(@concert,@performance) do |f| %>
+
+<div class="infosection">
+
+  <h2>Artists performing this song: </h2>
+  <p>
+    <%= select_tag "artist_to_add", options_from_collection_for_select(@concert.performers, "id" , "pname") %>
+    <%= check_box_tag("artist_add") %>
+    <%= label_tag("artist_add", "Add this association") %><br>
+  </p>
+  <h2>Remove an artist from this performance:</h2>
+  <p>
+    <%= select_tag "artist_to_delete", options_from_collection_for_select(@concert.performers, "id" , "pname") %>
+    <%= check_box_tag("artist_del") %>
+    <%= label_tag("artist_del", "Remove this association") %><br>
+  </p>
+  <p>    <%= f.submit %>  </p>
+</div>
+<% end %>
+
+
+<div class="afterinfosection">
+  <%= link_to 'Concert Manage Link', managelink_concert_path(@concert) %>
+</div>

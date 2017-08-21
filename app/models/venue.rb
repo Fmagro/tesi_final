@@ -1,7 +1,7 @@
 class Venue < ApplicationRecord
   has_many :concerts, inverse_of: 'venue'
  
-  validates :vname, presence: true, 
+  validates :vname, uniqueness: true, presence: true, 
                     length: { maximum: 25 }
   validates :address, presence: true, 
                     length: { maximum: 50 }

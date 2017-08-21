@@ -1,5 +1,5 @@
 class PerformancesController < ApplicationController
-  http_basic_authenticate_with name:  Tesi::Application.config.usrname, password: Tesi::Application.config.pwd, except: [:show]
+  http_basic_authenticate_with name:  "admin", password: "12345", except: [:show]
 
   def index
     @performances = Performance.all
@@ -27,10 +27,10 @@ class PerformancesController < ApplicationController
     @performance.position = @concert.performances.count+1
 
     if @performance.save
-      redirect_to concert_path(@concert)
+      redirect_to managelink_concert_path(@concert)
     else
       @concert = Concert.find(params[:concert_id])
-      render 'concerts/show'
+      render 'concerts/managelink'
     end
   end
  
@@ -50,7 +50,7 @@ class PerformancesController < ApplicationController
     @performance = Performance.find(params[:id])
     @performance.destroy
  
-    redirect_to performances_path
+    redirect_to managelink_performances_path
   end
  
  
@@ -73,7 +73,7 @@ class PerformancesController < ApplicationController
       @performerd = Performer.where(:id  => params[:artist_to_delete])
       @performance.performers.delete(@performerd)
     end
-    redirect_to @concert 
+    redirect_to manageperformer_concert_performance_path(@concert,@performance) 
     
    
   end

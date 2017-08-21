@@ -8,11 +8,26 @@
   <div class="infosection">   
   <%= render 'concertinfo', f: f %>
 
+  <!-- Force the admin to add at least one instance of each associated model  -->
+
   <h2>Venue for this concert: </h2>
-    <p><%= select_tag "venue_to_add", options_from_collection_for_select(Venue.all, "id" , "name") %>
-      <%= label_tag("venue_add", "Add this association") %><br></p>
+    <p><%= select_tag "venue_to_add", options_from_collection_for_select(Venue.all, "id" , "vname") %><br>
+    </p>
 
 
+  <h2>Add the first performer: </h2>
+    <p>
+      <%= select_tag "artist_to_add", options_from_collection_for_select(Performer.all, "id" , "pname") %><br>
+    </p>
+
+  <h2>Add the first song: </h2>
+    <%= f.fields_for :performances, @concert.performances.build do |ff| %>
+      <p>
+      <%= ff.select :song_id, Song.all.collect{ |p| [p.title, p.id] } %><br>
+      </p>
+   
+    <% end %>
+ <%= @concert.performances.count %>
   <p>    <%= f.submit %>  </p>
  
   </div>
