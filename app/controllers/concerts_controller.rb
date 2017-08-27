@@ -61,18 +61,24 @@ class ConcertsController < ApplicationController
     @concert = Concert.find(params[:id])
     if params[:artist_add]
       @performer = Performer.where(:id  => params[:artist_to_add])
-      @concert.performers<< @performer 
+      if  @concert.performers.by_id(params[:artist_to_add]).count ==0
+        @concert.performers<< @performer        
+      end 
+
     end
+ 
     if (params[:artist_del])
-      if @concert.performers.lenght >1
-      @performerd = Performer.where(:id  => params[:artist_to_delete])
-      @concert.performers.delete(@performerd)
+      if @concert.performers.length >1
+        @performerd = Performer.where(:id  => params[:artist_to_delete]) 
+     
+        @concert.performers.delete(@performerd)
       else
-        errors.add("Cannot delete: there must be at least one associated performer to the concert")
-        render 'managelink' 
+#        errors.add("Cannot delete: there must be at least one associated performer to the concert")
+        
       end
+
     end
-      redirect_to managelink_concert_path(@concert)
+    redirect_to managelink_concert_path(@concert)
   end 
 
 

@@ -1,10 +1,19 @@
 <h1>Add or remove a performer to the performance</h1>
 
+<%= render 'errors' %>
+
 <%= form_for @performance, url: addperformer_concert_performance_path(@concert,@performance) do |f| %>
 
 <div class="infosection">
 
   <h2>Artists performing this song: </h2>
+
+  <table>
+    <% @performance.performers.each do |performer| %>
+          <tr><td><%= performer.pname %></td></tr>
+    <% end %>
+  </table>
+
   <p>
     <%= select_tag "artist_to_add", options_from_collection_for_select(@concert.performers, "id" , "pname") %>
     <%= check_box_tag("artist_add") %>
@@ -12,11 +21,12 @@
   </p>
   <h2>Remove an artist from this performance:</h2>
   <p>
-    <%= select_tag "artist_to_delete", options_from_collection_for_select(@concert.performers, "id" , "pname") %>
+    <%= select_tag "artist_to_delete", options_from_collection_for_select(@performance.performers, "id" , "pname") %>
     <%= check_box_tag("artist_del") %>
     <%= label_tag("artist_del", "Remove this association") %><br>
   </p>
   <p>    <%= f.submit %>  </p>
+  <h7>* A performance has to have at least one performer </h7>
 </div>
 <% end %>
 

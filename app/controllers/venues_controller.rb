@@ -21,7 +21,7 @@ class VenuesController < ApplicationController
     @venue = Venue.new(venue_params)
  
     if @venue.save
-      redirect_to @venue
+      redirect_to managelink_venue_path(@venue)
     else
       render 'new'
     end
@@ -31,7 +31,7 @@ class VenuesController < ApplicationController
     @venue = Venue.find(params[:id])
  
     if @venue.update(venue_params)
-      redirect_to @venue
+      redirect_to managelink_venue_path(@venue)
     else
       render 'edit'
     end

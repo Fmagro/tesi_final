@@ -11,7 +11,11 @@ class Performer < ApplicationRecord
 
   scope :by_name, -> (name_s) { where("pname = ?", name_s) if name_s.present? }
 
+  scope :by_id, -> (id_s) { where("id = ?", id_s) if id_s.present? }
+
+
 private
+
   def xortype
     if((type == 'Individual' || type == 'Group') && !(type == 'Individual' && type == 'Group'))
     true

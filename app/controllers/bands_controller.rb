@@ -49,8 +49,10 @@ class BandsController < ApplicationController
  
   def destroy
     @band = Band.find(params[:id])
-    @band.destroy
-    redirect_to performers_path
+    if @band.group.bands.length >1 
+      @band.destroy
+    end
+    redirect_to managelink_performer_path(@band.group)
   end
  
   private

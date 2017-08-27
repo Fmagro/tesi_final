@@ -1,5 +1,5 @@
 class Venue < ApplicationRecord
-  has_many :concerts, inverse_of: 'venue'
+  has_many :concerts, inverse_of: 'venue', dependent: :destroy
  
   validates :vname, uniqueness: true, presence: true, 
                     length: { maximum: 25 }

@@ -20,7 +20,7 @@
       <td><%= link_to 'Manage Link', managelink_venue_path(venue) %></td>
       <td><%= link_to 'Destroy', venue_path(venue),
               method: :delete,
-              data: { confirm: 'Are you sure?' } %></td>
+              data: { confirm: 'WARNING - All related Concerts will be deleted. Are you sure?' } %></td>
     </tr>
   <% end %>
 </table>

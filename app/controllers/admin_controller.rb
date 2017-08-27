@@ -1,5 +1,5 @@
 class AdminController < ApplicationController
-  http_basic_authenticate_with name:  Tesi::Application.config.usrname, password: Tesi::Application.config.pwd
+  http_basic_authenticate_with name:  "admin", password: "12345"
   def index
   end
 end

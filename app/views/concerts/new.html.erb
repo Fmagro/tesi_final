@@ -1,6 +1,5 @@
 <h1>New concert</h1>
 
-
 <%= form_for @concert do |f| %>
  
   <%= render 'errors' %>
@@ -21,13 +20,13 @@
     </p>
 
   <h2>Add the first song: </h2>
-    <%= f.fields_for :performances, @concert.performances.build do |ff| %>
+    <%= f.fields_for :performances, create: @concert.performances.build do |ff| %>
       <p>
       <%= ff.select :song_id, Song.all.collect{ |p| [p.title, p.id] } %><br>
       </p>
    
     <% end %>
- <%= @concert.performances.count %>
+
   <p>    <%= f.submit %>  </p>
  
   </div>

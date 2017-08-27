@@ -1,4 +1,6 @@
 <h1>Concert</h1>
+ 
+<%= render 'errors' %>
 
 <div class="infosection">
   <p>
@@ -60,6 +62,8 @@
       <%= label_tag("artist_del", "Remove this association") %><br>
     </p>
     <p>    <%= f.submit %>  </p>
+    <h6>* A concert must have at least one performer</h6>
+
   <% end %>
 </div>
  
@@ -93,6 +97,7 @@
       <% end %>
     </table>
     <td><%= link_to 'Edit', edit_concert_path(@concert) %></td>
+   <h6> * A concert must have at least one song </h6>
 
   <h2>Add a song to the setlist:</h2>
   <%= form_for([@concert, @concert.performances.build]) do |f| %>
@@ -100,7 +105,6 @@
     <%= f.select :song_id, Song.all.collect{ |p| [p.title, p.id] } %><br>
       </p>
       <%= link_to 'Add a new Song?', new_song_path %> 
-
       <p>
         <%= f.submit %>
       </p>

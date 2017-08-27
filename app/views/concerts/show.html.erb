@@ -9,53 +9,25 @@
 
 <div class="infosection">
   <h2>Venue: </h2>
-  <td><%= link_to @concert.venue.vname,  venue_path(@concert.venue) %></td>
-
-  <%= form_for @concert, url: managevenue_concert_path(@concert) do |f| %>
-
-    <p><%= check_box_tag("venue_del") %>
-    <%= label_tag("venue_del", "Replace with another venue?") %>   <br>
-    </p>
-  
-    <p>
-    <%= select_tag "venue_to_add", options_from_collection_for_select(Venue.all, "id" , "vname") %>
-    <%= label_tag("Add this association") %><br>
-    </p>
-
-    <p><%= f.submit %></p>
-  <% end %>
- 
+  <p> <%= @concert.venue.vname %>
+      <%= link_to "Show",  venue_path(@concert.venue) %>
 </div> 
+
+
 <div class="infosection">
   <h2>Artists performing in this concert: </h2>
   <table>
     <tr>
       <th>Name</th>
+      <th colspan="2"></th>
     </tr>
     <% @concert.performers.each do |performer| %>
       <tr>
-        <td><%= link_to performer.pname, performer_path(performer) %></td>
+        <td><%=  performer.pname %></td>
+        <td><%= link_to "Show", performer_path(performer) %></td>
       </tr>  
     <% end %>
   </table>
-
-  <%= form_for @concert, url: manageartist_concert_path(@concert) do |f| %>
-
-
-    <h4>Artists performing in this concert: </h4>
-    <p>
-      <%= select_tag "artist_to_add", options_from_collection_for_select(Performer.all, "id" , "pname") %>
-      <%= check_box_tag("artist_add") %>
-      <%= label_tag("artist_add", "Add this association") %><br>
-    </p>
-    <h4>Remove an artist from this concert:</h4>
-    <p>
-      <%= select_tag "artist_to_delete", options_from_collection_for_select(@concert.performers, "id" , "pname") %>
-      <%= check_box_tag("artist_del") %>
-      <%= label_tag("artist_del", "Remove this association") %><br>
-    </p>
-    <p>    <%= f.submit %>  </p>
-  <% end %>
 </div>
  
 
@@ -65,35 +37,22 @@
     <tr>
       <th>Position</th>
       <th>Title</th>
-      <th>Artists</th>
+      <th>Performers</th>
       <th colspan="2"></th>
     </tr>
-      <% @concert.setlists.order("position").each do |setlist| %>
+      <% @concert.performances.order("position").each do |performance| %>
       <tr>
-        <td><%= setlist.position %></td>
-        <td><%= setlist.song.title %></td>
+        <td><%= performance.position %></td>
+        <td><%= performance.song.title %></td>
         <td><table>
-        <% setlist.performers.each do |performer| %>
+        <% performance.performers.each do |performer| %>
           <tr><td><%= performer.pname %></td></tr>
         <% end %>
         </table></td>
-        <td><%= link_to 'Edit', edit_concert_path(@concert) %></td>
-        <td><%= link_to 'Add a performer', manageperformer_concert_setlist_path(@concert,setlist) %></td>
+        <td><%= link_to 'Show', song_path(performance.song) %></td>
       </tr>  
       <% end %>
     </table>
-
-  <h2>Add a song to the setlist:</h2>
-  <%= form_for([@concert, @concert.setlists.build]) do |f| %>
-    <p>
-    <%= f.select :song_id, Song.all.collect{ |p| [p.title, p.id] } %><br>
-      </p>
-      <%= link_to 'Add a new Song?', new_song_path %> 
-
-      <p>
-        <%= f.submit %>
-      </p>
-    <% end %>
 </div>
 <div class="afterinfosection">
   <%= link_to 'Edit concert', edit_concert_path(@concert) %> 

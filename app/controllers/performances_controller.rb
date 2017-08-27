@@ -24,8 +24,8 @@ class PerformancesController < ApplicationController
     #performance.song =@song
     @concert = Concert.find(params[:concert_id])
     @performance = @concert.performances.create(performance_params)
-    @performance.position = @concert.performances.count+1
 
+    #@performance.position = @concert.performances.count+1
     if @performance.save
       redirect_to managelink_concert_path(@concert)
     else
@@ -42,15 +42,16 @@ class PerformancesController < ApplicationController
     if @performance.update(performance_params)
       redirect_to edit_concert_path(@concert)
     else
-      render 'edit'
+      render 'concerts/edit'
     end
   end
  
   def destroy
     @performance = Performance.find(params[:id])
-    @performance.destroy
- 
-    redirect_to managelink_performances_path
+    if @performance.concert.performances.length > 1
+      @performance.destroy
+    end
+    redirect_to managelink_concert_path(@performance.concert)
   end
  
  
@@ -67,11 +68,17 @@ class PerformancesController < ApplicationController
     
     if params[:artist_add]
       @performer = Performer.where(:id  => params[:artist_to_add])
-      @performance.performers<< @performer 
+      if  @performance.performers.by_id(params[:artist_to_add]).count ==0
+        @performance.performers<< @performer 
+      end
     end
     if (params[:artist_del])
-      @performerd = Performer.where(:id  => params[:artist_to_delete])
-      @performance.performers.delete(@performerd)
+      if @performance.performers.length >1
+        @performerd = Performer.where(:id  => params[:artist_to_delete])
+        @performance.performers.delete(@performerd)
+      else
+       # errors.add(:concert_id, "Cannot delete: there must be at least one associated performer to the performance")
+      end
     end
     redirect_to manageperformer_concert_performance_path(@concert,@performance) 
     

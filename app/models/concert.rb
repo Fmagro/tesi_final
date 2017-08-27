@@ -8,9 +8,14 @@ class Concert < ApplicationRecord
 
   belongs_to :venue, inverse_of: 'concerts', foreign_key: 'venue_id'
   #accepts_nested_attributes_for :venue 
-
 	
   validates :cdate, presence: true
+
+  #validates :performers , length: {minimum: 1}
+
+  validate :songmin
+
+  validate :performermin
 
   scope :by_venue, -> (venue_s) { where('vname = ?', venue_s) if venue_s.present? }
 
@@ -24,8 +29,24 @@ class Concert < ApplicationRecord
 
   scope :before, -> (b_date) { where('cdate <= ?', Date.parse(b_date)) if b_date.present? }
 
-  def conc(c_id)
-    Concert.find(c_id)
+  private
+
+    def conc(c_id)
+      Concert.find(c_id)
+    end
+
+    def songmin
+      if self.performances.length < 1
+         errors.add(:concert, "must have at least one song")
+      end
+    end
+
+    def performermin
+      if self.performers.length < 1
+         errors.add(:concert, "must have at least one performer")
+      end
+    end
+
   end
 
-end
+

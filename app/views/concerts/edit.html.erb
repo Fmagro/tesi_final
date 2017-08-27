@@ -8,11 +8,11 @@
 <%= render 'concertinfo', f: f %>
 
 <h2>Setlist</h2>
-  <% @concert.setlists.each do |setlist| %> 
-     <%= f.fields_for :setlists, setlist do |ff| %>
-     <%= ff.text_field :position %> 
+  <% @concert.performances.each do |performance| %> 
+     <%= f.fields_for :performances, performance do |ff| %>
+     <%= ff.number_field :position %> 
 
-      <%=setlist.song.title%>
+      <%=performance.song.title%>
 <br>
      <% end %>
    <% end %>

@@ -7,6 +7,7 @@ class Band < ApplicationRecord
 
   validates :individual_id, :uniqueness => { :scope => :group_id}
 
+
 private
   def joining_before_leaving 
     if leaving != nil && joining !=nil   
