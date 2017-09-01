@@ -1,30 +1,33 @@
-<h2>Search results: </h2>
+<h1>Search results: </h1>
   <table>
   <tr>
-    <th>Name</th>
     <th>Venue</th>
     <th>City</th>
     <th>Country</th>
     <th>Date</th>
     <th>Artists</th>
+    <th colspan='1'> </th>
   </tr>
   <% @concerts.each do |j| %>
     <tr>
-      <td><%= link_to j.concertname, concert_path(j.concertid) %></td>
-      <td><%=  j.venue.name %></td>
+      <td><%=  j.venue.vname %></td>
       <td><%=  j.venue.city %></td>
       <td><%=  j.venue.country %></td>
-      <td><%=  j.date %></td>
+      <td><%=  j.cdate %></td>
       <td>       
         <table>
-        <% j.conc(j.concertid).performers.first(3).each do |a| %>
+
+        <% j.conc(j.concert_id).performers.first(3).each do |a| %>
           <tr><td><%=  a.pname %></td></tr>
         <% end %>
-        <% if j.conc(j.concertid).performers.count > 3 %>
+
+        <% if j.conc(j.concert_id).performers.count > 3 %>
          <tr><td><%=  '...' %></td></tr>            
         <% end %>
         </table>
-      </td> 
+      </td>
+      <td><%= link_to "Show", concert_path(j.conc(j.concert_id)) %></td>
     </tr>  
+
   <% end %>
 </table>

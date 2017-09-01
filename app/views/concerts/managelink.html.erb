@@ -85,6 +85,7 @@
         <% performance.performers.each do |performer| %>
           <tr><td><%= performer.pname %></td></tr>
         <% end %>
+        <br/>
         </table></td>
         <td><%= link_to 'Show', song_path(performance.song) %></td>
         <td><%= link_to 'Manage link', managelink_song_path(performance.song) %></td>

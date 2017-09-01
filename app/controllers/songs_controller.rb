@@ -52,10 +52,16 @@ class SongsController < ApplicationController
   end
 
   def songsearch
-    @songs = Song.by_title(params[:title_s]).by_genre(params[:genre_s]) 
-    #@songs = @songs.by_genre(params[:genre_s])
-     @songs = @songs.joins(:performers).by_artist(params[:artist_s]).group(:id)  
-  
+    @songs = Song.by_title(params[:title_s]).by_genre(params[:genre_s]).group(:id)
+
+
+     #@songs = @songs.joins(:performances).joins(:performers).by_artist(params[:artist_s]).group(:id) 
+
+#@concerts =  Concert.select('*,concerts.id as concertid, concerts.name as concertname').before(params[:b_date]).after(params[:a_date]).group(:id)
+    #@concerts =  Concert.select('*,concerts.id as concertid, concerts.name as concertname').before(params[:b_date]).after(params[:a_date])
+    #@concerts=@concerts.joins(:venue).select('venues.name as venuename').by_venue(params[:venue_s]).by_city(params[:city_s]).by_country(params[:country_s])
+    #@concerts=@concerts.joins(:performers).by_performer(params[:performer_s])
+#    @concerts=@concerts.joins(:artists).select("artists.name as artistname").by_artist(params[:artist_s]).group(:id)  
   end
  
   private

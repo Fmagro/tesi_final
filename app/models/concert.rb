@@ -23,17 +23,17 @@ class Concert < ApplicationRecord
 
   scope :by_country, -> (country_s) { where('country = ?', country_s) if country_s.present? }
 
-  scope :by_performer, -> (performer_s) { where('pname = ?', performer_s) if performer_s.present? }
+  scope :by_performer, -> (artist_s) { where('pname = ?', artist_s) if artist_s.present? }
 
   scope :after, -> (a_date) { where('cdate >= ?', Date.parse(a_date)) if a_date.present? }
 
   scope :before, -> (b_date) { where('cdate <= ?', Date.parse(b_date)) if b_date.present? }
 
-  private
+  def conc(c_id)
+    Concert.find(c_id)
+  end
 
-    def conc(c_id)
-      Concert.find(c_id)
-    end
+  private
 
     def songmin
       if self.performances.length < 1
