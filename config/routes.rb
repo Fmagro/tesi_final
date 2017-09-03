@@ -38,6 +38,10 @@ Rails.application.routes.draw do
     member do
       get 'managelink'
     end
+    collection do
+      get 'performerfilter'
+      get 'performersearch'
+    end
   end
 
   resources :individuals, :controller => "performers", :type => "Individual"
@@ -48,6 +52,10 @@ Rails.application.routes.draw do
   resources :venues do
     member do
       get 'managelink'
+    end
+    collection do
+      get 'venuefilter'
+      get 'venuesearch'
     end
   end 
   

@@ -1,0 +1,18 @@
+<h1>Search results: </h1>
+  <table>
+  <tr>
+    <th>Venue</th>
+    <th>City</th>
+    <th>Country</th>
+
+  </tr>
+  <% @venues.each do |j| %>
+    <tr>
+      <td><%=  link_to j.vname, venue_path(j) %></td>
+      <td><%=  j.city %></td>
+      <td><%=  j.country %></td>
+
+    </tr>  
+
+  <% end %>
+</table>

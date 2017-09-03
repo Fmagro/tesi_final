@@ -10,4 +10,11 @@ class Venue < ApplicationRecord
   validates :country, presence: true, 
                     length: { maximum: 25 }
 
+
+  scope :by_venue, -> (venue_s) { where('vname = ?', venue_s) if venue_s.present? }
+
+  scope :by_city, -> (city_s) { where('city = ?', city_s) if city_s.present? }
+
+  scope :by_country, -> (country_s) { where('country = ?', country_s) if country_s.present? }
+
 end

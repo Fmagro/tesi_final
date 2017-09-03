@@ -2,6 +2,13 @@
  
 <%= render 'errors' %>
 
+  <div class=nextsection >
+    <p> GUIDED DATA ENTRY </p>
+    <h6> *The next suggested action is to add/remove the performers to each song in the Setlist</h6>
+    <%#= link_to "Link performers and songs to the  concert",   managelink_concert_path(f) %>
+  </div>
+
+<div class=afternextsection ></div>  
 <div class="infosection">
   <p>
     <strong>Date:</strong>
@@ -68,6 +75,9 @@
 </div>
  
 
+  <div class=afterinfosection ></div> 
+
+  <%#= render 'errors' %>
 <div class="infosection">
   <h2>Setlist</h2>
     <table>
@@ -92,7 +102,14 @@
         <td><%= link_to 'Destroy link', concert_performance_path(@concert,performance),
               method: :delete,
               data: { confirm: 'Are you sure?' } %></td>
-        <td><%= link_to 'Add/Remove a performer', manageperformer_concert_performance_path(@concert,performance) %></td>
+        <td>
+          <div class=nextsection >
+
+          <%= link_to 'Add/Remove a performer', manageperformer_concert_performance_path(@concert,performance) %>
+          </div>
+
+          <div class=afternextsection ></div>
+        </td>
 
       </tr>  
       <% end %>

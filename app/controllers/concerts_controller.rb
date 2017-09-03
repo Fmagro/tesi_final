@@ -30,6 +30,7 @@ class ConcertsController < ApplicationController
 
     if @concert.save
       redirect_to managelink_concert_path(@concert)
+      #redirect_to new_concert_path(@concert)
     else
       render 'new'
     end
@@ -106,11 +107,11 @@ class ConcertsController < ApplicationController
 
 
   def concertsearch
-@concerts =  Concert.select('*').before(params[:b_date]).after(params[:a_date])
-    #@concerts =  Concert.select('*,concerts.id as concertid, concerts.name as concertname').before(params[:b_date]).after(params[:a_date])
-   @concerts=@concerts.joins(:venue).by_venue(params[:venue_s]).by_city(params[:city_s]).by_country(params[:country_s])
+    @concerts =  Concert.select('*').before(params[:b_date]).after(params[:a_date])
+
+    @concerts=@concerts.joins(:venue).by_venue(params[:venue_s]).by_city(params[:city_s]).by_country(params[:country_s])
+
     @concerts=@concerts.joins(:performers).by_performer(params[:artist_s]).group(:id) 
-#    @concerts=@concerts.joins(:artists).select("artists.name as artistname").by_artist(params[:artist_s]).group(:id) 
 
   end
  

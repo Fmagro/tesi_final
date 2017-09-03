@@ -1,10 +1,21 @@
 <h1>New concert</h1>
 
-<%= form_for @concert do |f| %>
- 
-  <%= render 'errors' %>
 
-  <div class="infosection">   
+ 
+<%= form_for @concert do |f| %>
+
+  <div class=afterinfosection ></div> 
+  <div class=nextsection >
+    <p> GUIDED DATA ENTRY </p>
+    <h6> *After creating the concert you will be authomatically redirected to the page where you can manage the associations linked to the Concert</h6>
+    <%#= link_to "Link performers and songs to the  concert",   managelink_concert_path(f) %>
+  </div>
+
+<div class=afternextsection ></div>  
+  <%= render 'errors' %>
+ 
+  <div class="infosection"> 
+  
   <%= render 'concertinfo', f: f %>
 
   <!-- Force the admin to add at least one instance of each associated model  -->
@@ -30,6 +41,9 @@
   <p>    <%= f.submit %>  </p>
  
   </div>
+
+
+
 <% end %>
  
 

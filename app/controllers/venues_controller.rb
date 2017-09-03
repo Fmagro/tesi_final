@@ -21,7 +21,7 @@ class VenuesController < ApplicationController
     @venue = Venue.new(venue_params)
  
     if @venue.save
-      redirect_to managelink_venue_path(@venue)
+      redirect_to new_venue_path(@venue)
     else
       render 'new'
     end
@@ -48,6 +48,16 @@ class VenuesController < ApplicationController
     @venue = Venue.find(params[:id]) 
   end
  
+  def venuefilter
+    @venues = Venue.all    
+  end
+
+
+  def  venuesearch
+    @venues =  Venue.select('*').by_venue(params[:venue_s]).by_city(params[:city_s]).by_country(params[:country_s]).group(:id)
+
+
+  end 
   private
     def venue_params
       params.require(:venue).permit(:vname, :address, :city, :country)

@@ -1,4 +1,4 @@
-<h2>Search results: </h2>
+<h1>Search results: </h1>
   <table class="spc">
   <tr>
     <th>Title</th>
@@ -12,17 +12,20 @@
       <td>       
         <table>
 
-          <% s.performances.each do |p| %>
 
-            <td><%#=  p.performers.count %>
+          <% s.songfind(s.id).performances.each do |p| %>
+          <%# s.performances.each do |p| %>
+
+
+            <%# p.perfind(p.performace_id).each do |a| %>
             <% p.performers.first(3).each do |a| %>
               <tr><td><%=  a.pname %></td></tr>
             <% end %>
             <% if p.performers.count > 3 %>
              <tr><td><%=  '...' %></td></td></tr>            
-            <% end %>
+            <% end %> 
 
-          <% end %>
+          <% end %> 
 
         </table>
       </td> 

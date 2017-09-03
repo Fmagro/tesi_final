@@ -7,6 +7,10 @@ class Performance < ApplicationRecord
 
   #validates  :position, presence: true
 
+  #def perfind(p_id)
+   #Performance.find(p_id)
+  #end
+
   private
     def pos_default
       self.position = self.concert.performances.count + 1

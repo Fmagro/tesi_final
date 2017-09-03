@@ -142,6 +142,29 @@ h1 {
     
 }
 
+
+.nextsection {
+/*    display: inline-block;
+    border: 1px solid #273a61;
+    width: 40vw;
+    min-height: 20vh;
+    background-color: #e4ebf6;*/
+    float: left;
+    background-color: #B47746;
+    margin: 0.8em;
+    min-width: 18vw;
+    padding: 0.8em;
+    min-height: 2em;
+    border: 1px solid #273a61;
+    box-shadow:10px 10px 5px grey;
+
+}
+
+.afternextsection {
+    clear: left;
+    margin-top: 0.5em;
+}
+
 table.spc{
     border-spacing: 10px;
     /*border: 1px solid black;*/

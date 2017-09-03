@@ -21,7 +21,11 @@ class PerformersController < ApplicationController
     @performer = perf_type.new(perf_params)
     @performer.type = params[:type]
     if @performer.save
-      redirect_to managelink_performer_path(@performer)
+      if @performer.type = 'group'
+        redirect_to new_group_path(@performer)
+      else
+        redirect_to new_individual_path(@performer)
+      end
     else
       render 'new'
     end
@@ -46,6 +50,19 @@ class PerformersController < ApplicationController
 
   def managelink
     @performer = Performer.find(params[:id])
+  end
+
+
+  def performerfilter
+    @performers = Performer.all    
+  end
+
+
+  def performersearch
+
+    @performers =  Performer.select('*').by_name(params[:name_s]).by_type(params[:type_s]).group(:id) 
+    #@performers =  @performers.joins(:performances).joins(:songs).by_song(params[:song_s]).group(:id) 
+
   end
  
   private 

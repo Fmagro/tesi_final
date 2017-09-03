@@ -1,0 +1,36 @@
+<h1>Search results: </h1>
+  <table>
+  <tr>
+    <th>Artists</th>
+    <th>Type</th>
+    <th>Songs</th>
+    <th>Number of times the song has been performed (da correggere)
+
+  </tr>
+  <% @performers.each do |j| %>
+    <tr>
+      <td><%=  j.pname %></td>
+      <td><%=  j.type %></td>
+      <td>       
+        <table>
+
+          <% j.perf(j.id).performances.uniq.each do |a| %>
+            <tr>
+            <td><%=  a.song.title %></td>
+            <!-- omettere le ripetizioni -->
+           <td><%=  j.perf(j.id).performances.count %></td>
+            </tr>
+          <% end %>
+
+          <% if j.perf(j.id).performances.count >3 %>
+           <tr><td><%=  '...' %></td></tr>            
+          <% end %>
+
+
+        </table> 
+      </td>
+
+    </tr>  
+
+  <% end %>
+</table>

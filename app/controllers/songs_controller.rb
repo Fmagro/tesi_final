@@ -20,7 +20,7 @@ class SongsController < ApplicationController
     @song = Song.new(song_params)
  
     if @song.save
-      redirect_to managelink_song_path(@song)
+      redirect_to new_song_path(@song)
     else
       render 'new'
     end
@@ -52,16 +52,12 @@ class SongsController < ApplicationController
   end
 
   def songsearch
-    @songs = Song.by_title(params[:title_s]).by_genre(params[:genre_s]).group(:id)
+    @songs = Song.by_title(params[:title_s]).by_genre(params[:genre_s])
+    @songs = @songs.joins(:performances).by_artist(params[:artist_s]).group(:id) 
 
-
-     #@songs = @songs.joins(:performances).joins(:performers).by_artist(params[:artist_s]).group(:id) 
-
-#@concerts =  Concert.select('*,concerts.id as concertid, concerts.name as concertname').before(params[:b_date]).after(params[:a_date]).group(:id)
-    #@concerts =  Concert.select('*,concerts.id as concertid, concerts.name as concertname').before(params[:b_date]).after(params[:a_date])
-    #@concerts=@concerts.joins(:venue).select('venues.name as venuename').by_venue(params[:venue_s]).by_city(params[:city_s]).by_country(params[:country_s])
-    #@concerts=@concerts.joins(:performers).by_performer(params[:performer_s])
-#    @concerts=@concerts.joins(:artists).select("artists.name as artistname").by_artist(params[:artist_s]).group(:id)  
+    #@songs = @songs.joins(:performances).joins(:performances_performers).joins(:performers).by_artist(params[:artist_s]).group(:id)
+    #@songs = @songs.joins(:performances).joins(:performers).by_artist(params[:artist_s]).group(:id)
+   #@songs.find(:all, :joins => "JOIN performances ON performance_id = song.id JOIN performance_performers ON performance_performer.performance_id = performance.id JOIN performer ON performer.id = performance_performer.performer_id" :conditions => "performer.pname = 'i1'" :limit => 5)   
   end
  
   private
