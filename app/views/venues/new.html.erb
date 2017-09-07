@@ -1,5 +1,8 @@
 <h1>New venue</h1>
 
+ 
+<%= render 'form' %>
+
 <div class=nextsection >
   <p> GUIDED DATA ENTRY </p>
   <%= link_to "New single performer", new_individual_path %>
@@ -7,9 +10,6 @@
 </div>
 
 <div class=afternextsection >
-<p> </p>
-</div>
- 
-<%= render 'form' %>
- 
-<%#= link_to 'Back', venues_path %>
+<%= link_to 'Venue Index', venues_path %>
+</div> 
+

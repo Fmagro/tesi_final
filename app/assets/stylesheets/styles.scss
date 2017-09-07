@@ -99,10 +99,11 @@ h1 {
     min-height: 20vh;
     background-color: #e4ebf6;*/
     float: left;
+    /*display: inline-block;*/
     margin: 0.8em;
     min-width: 42vw;
     padding: 0.8em;
-    min-height: 10em;
+    min-height: 5em;
     border: 1px solid #273a61;
     box-shadow:10px 10px 5px grey;
 
@@ -111,6 +112,7 @@ h1 {
 .afterinfosection {
     clear: left;
     margin-top: 0.5em;
+    margin-left: 0.8em;
 }
 
 .iframesection {
@@ -153,6 +155,7 @@ h1 {
     background-color: #B47746;
     margin: 0.8em;
     min-width: 18vw;
+    max-width: 42vw;
     padding: 0.8em;
     min-height: 2em;
     border: 1px solid #273a61;
@@ -163,12 +166,9 @@ h1 {
 .afternextsection {
     clear: left;
     margin-top: 0.5em;
+    margin-left: 0.8em;
 }
 
-table.spc{
-    border-spacing: 10px;
-    /*border: 1px solid black;*/
-    
-}
+
 
 

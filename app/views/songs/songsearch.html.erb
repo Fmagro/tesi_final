@@ -1,34 +1,13 @@
 <h1>Search results: </h1>
-  <table class="spc">
+  <table>
   <tr>
     <th>Title</th>
     <th>Genre</th>
-    <th>Performer</th>
   </tr>
   <% @songs.each do |s| %>
     <tr>
       <td><%= link_to s.title, song_path(s) %></td>
       <td><%=  s.genre %></td>
-      <td>       
-        <table>
-
-
-          <% s.songfind(s.id).performances.each do |p| %>
-          <%# s.performances.each do |p| %>
-
-
-            <%# p.perfind(p.performace_id).each do |a| %>
-            <% p.performers.first(3).each do |a| %>
-              <tr><td><%=  a.pname %></td></tr>
-            <% end %>
-            <% if p.performers.count > 3 %>
-             <tr><td><%=  '...' %></td></td></tr>            
-            <% end %> 
-
-          <% end %> 
-
-        </table>
-      </td> 
     </tr> 
    
   <% end %>

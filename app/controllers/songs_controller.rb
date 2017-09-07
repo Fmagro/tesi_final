@@ -53,11 +53,7 @@ class SongsController < ApplicationController
 
   def songsearch
     @songs = Song.by_title(params[:title_s]).by_genre(params[:genre_s])
-    @songs = @songs.joins(:performances).by_artist(params[:artist_s]).group(:id) 
-
-    #@songs = @songs.joins(:performances).joins(:performances_performers).joins(:performers).by_artist(params[:artist_s]).group(:id)
-    #@songs = @songs.joins(:performances).joins(:performers).by_artist(params[:artist_s]).group(:id)
-   #@songs.find(:all, :joins => "JOIN performances ON performance_id = song.id JOIN performance_performers ON performance_performer.performance_id = performance.id JOIN performer ON performer.id = performance_performer.performer_id" :conditions => "performer.pname = 'i1'" :limit => 5)   
+  
   end
  
   private

@@ -107,11 +107,7 @@ class ConcertsController < ApplicationController
 
 
   def concertsearch
-    @concerts =  Concert.select('*').before(params[:b_date]).after(params[:a_date])
-
-    @concerts=@concerts.joins(:venue).by_venue(params[:venue_s]).by_city(params[:city_s]).by_country(params[:country_s])
-
-    @concerts=@concerts.joins(:performers).by_performer(params[:artist_s]).group(:id) 
+    @concerts =  Concert.select('*').before(params[:b_date]).after(params[:a_date]).joins(:venue).by_venue(params[:venue_s]).by_city(params[:city_s]).by_country(params[:country_s]).joins(:performers).by_performer(params[:artist_s]).group(:id) 
 
   end
  

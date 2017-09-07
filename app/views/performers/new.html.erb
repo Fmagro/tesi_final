@@ -1,12 +1,5 @@
 <h1>New performer</h1>
 
- 
-<div class=nextsection >
-  <p> GUIDED DATA ENTRY </p>
-  <%= link_to "New song", new_song_path %>
-</div>
-
-<div class=afternextsection ></div> 
 
   
 <%= form_for @performer do |f| %>
@@ -38,8 +31,16 @@
   </p>
   </div>
 
-
 <% end %>
+
+ 
+<div class=nextsection >
+  <p> GUIDED DATA ENTRY </p>
+  <%= link_to "New song", new_song_path %> | 
+  <%= link_to "New individual", new_individual_path %> | 
+  <%= link_to "New group", new_group_path %>
+</div>
+
 <div class="afterinfosection">
 <%= link_to 'Performer index', performers_path %>
 </div>

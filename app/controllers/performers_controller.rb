@@ -21,7 +21,7 @@ class PerformersController < ApplicationController
     @performer = perf_type.new(perf_params)
     @performer.type = params[:type]
     if @performer.save
-      if @performer.type = 'group'
+      if @performer.type == "Group"
         redirect_to new_group_path(@performer)
       else
         redirect_to new_individual_path(@performer)
@@ -60,8 +60,7 @@ class PerformersController < ApplicationController
 
   def performersearch
 
-    @performers =  Performer.select('*').by_name(params[:name_s]).by_type(params[:type_s]).group(:id) 
-    #@performers =  @performers.joins(:performances).joins(:songs).by_song(params[:song_s]).group(:id) 
+    @performers =  Performer.select('*').by_name(params[:name_s])
 
   end
  
