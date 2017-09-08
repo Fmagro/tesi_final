@@ -70,7 +70,7 @@
 
   <div class=afterinfosection ></div> 
 
-  <%#= render 'errors' %>
+
 <div class="infosection">
   <h2>Setlist</h2>
     <table>
@@ -85,10 +85,12 @@
         <td><%= performance.position %></td>
         <td><%= performance.song.title %></td>
         <td><table>
-        <% performance.performers.each do |performer| %>
-          <tr><td><%= performer.pname %></td></tr>
-        <% end %>
-        
+
+          <% performance.performers.each do |performer| %>
+    
+            <tr><td><%= performer.pname %></td></tr>
+          <% end %>
+
         </table></td>
         <td><%= link_to 'Show', song_path(performance.song) %></td>
         <td><%= link_to 'Manage link', managelink_song_path(performance.song) %></td>

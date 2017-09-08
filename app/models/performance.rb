@@ -5,13 +5,13 @@ class Performance < ApplicationRecord
   validates_uniqueness_of :song_id, :scope => :concert_id
   before_create :pos_default
 
+
   #validates  :position, presence: true
 
   private
     def pos_default
       self.position = self.concert.performances.count + 1
     end
-   
     
   end
 

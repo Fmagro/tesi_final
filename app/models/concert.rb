@@ -9,7 +9,7 @@ class Concert < ApplicationRecord
   belongs_to :venue, inverse_of: 'concerts', foreign_key: 'venue_id'
   #accepts_nested_attributes_for :venue 
 	
-  validates :cdate, presence: true
+  validates :cdate, uniqueness: { scope: :venue_id, message:"Only one concert is held in the same venue every day" },presence: true
 
   #validates :performers , length: {minimum: 1}
 
