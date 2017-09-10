@@ -1,5 +1,5 @@
 class PerformersController < ApplicationController
-    http_basic_authenticate_with name:  Tesi::Application.config.usrname, password: Tesi::Application.config.pwd, except: [:show]
+    http_basic_authenticate_with name:  "admin", password: "12345", except: [:show]
   def index
     @performers = Performer.all
   end
@@ -10,6 +10,7 @@ class PerformersController < ApplicationController
  
   def new
     @performer = perf_type.new
+    #@band = @performer.bands.build
   end
  
   def edit
@@ -20,7 +21,11 @@ class PerformersController < ApplicationController
     @performer = perf_type.new(perf_params)
     @performer.type = params[:type]
     if @performer.save
-      redirect_to @performer
+      if @performer.type == "Group"
+        redirect_to new_group_path(@performer)
+      else
+        redirect_to new_individual_path(@performer)
+      end
     else
       render 'new'
     end
@@ -30,7 +35,7 @@ class PerformersController < ApplicationController
     @performer = Performer.find(params[:id])
  
     if @performer.update(perf_params)
-      redirect_to @performer
+      redirect_to managelink_performer_path(@performer)
     else
       render 'edit'
     end
@@ -43,6 +48,22 @@ class PerformersController < ApplicationController
     redirect_to performers_path
   end
 
+  def managelink
+    @performer = Performer.find(params[:id])
+  end
+
+
+  def performerfilter
+    @performers = Performer.all    
+  end
+
+
+  def performersearch
+
+    @performers =  Performer.select('*').by_name(params[:name_s])
+
+  end
+ 
   private 
   
     def perf_types 
@@ -58,7 +79,7 @@ class PerformersController < ApplicationController
     end
 
     def perf_params
-      params.require(perf_req).permit(:pname, :bio, :type)
+      params.require(perf_req).permit(:pname, :bio, :type, bands_attributes: [:id, :group_id, :individual_id, :joining, :leaving])
 #params.require(params[:type].to_sym).permit(:pname, :bio)
     end
 end

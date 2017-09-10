@@ -1,0 +1,45 @@
+<h1>New concert</h1>
+
+
+ 
+<%= form_for @concert do |f| %>
+
+  <%= render 'errors' %>
+ 
+  <div class="infosection"> 
+  
+  <%= render 'concertinfo', f: f %>
+
+  <!-- Force the admin to add at least one instance of each associated model  -->
+
+  <h2>Venue for this concert: </h2>
+    <p><%= select_tag "venue_to_add", options_from_collection_for_select(Venue.all, "id" , "vname") %><br>
+    </p>
+
+
+  <h2>Add the first performer: </h2>
+    <p>
+      <%= select_tag "artist_to_add", options_from_collection_for_select(Performer.all, "id" , "pname") %><br>
+    </p>
+
+  <h2>Add the first song: </h2>
+    <%= f.fields_for :performances, create: @concert.performances.build do |ff| %>
+      <p>
+      <%= ff.select :song_id, Song.all.collect{ |p| [p.title, p.id] } %><br>
+      </p>
+   
+    <% end %>
+
+  <p>    <%= f.submit %>  </p>
+ 
+  </div>
+
+
+
+<% end %>
+
+<div class="afterinfosection" >
+ 
+<%= link_to 'Concert Index', concerts_path %>
+</div> 
+

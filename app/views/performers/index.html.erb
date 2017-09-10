@@ -1,0 +1,26 @@
+<h1>Listing Performers</h1>
+
+<%= link_to 'New individual', new_individual_path %>
+ | <%= link_to 'New group', new_group_path %>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Type</th>
+    <th colspan="3"></th>
+  </tr>
+ 
+  <% @performers.each do |performer| %>
+    <tr>
+      <td><%= performer.pname %></td>
+      <td><%= performer.type %></td>
+      <td><%= link_to 'Show', performer_path(performer) %></td>
+      <td><%= link_to 'Edit', edit_performer_path(performer) %></td>
+      <td><%= link_to 'Manage link', managelink_performer_path(performer) %></td>
+      <td><%= link_to 'Destroy', performer_path(performer),
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+</table>
+<%#= link_to 'Search for performers ', performerfilter_performers_path %> 
+

@@ -1,0 +1,17 @@
+<h1>Search results: </h1>
+  <table>
+  <tr>
+    <th>Artists</th>
+    <th>Type</th>
+
+
+  </tr>
+  <% @performers.each do |j| %>
+    <tr>
+      <td><%= link_to j.pname, performer_path(j) %></td>
+      <td><%=  j.type %></td>
+
+    </tr>  
+
+  <% end %>
+</table>

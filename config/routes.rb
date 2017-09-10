@@ -13,6 +13,7 @@ Rails.application.routes.draw do
       end
     end      
     member do
+      get 'managelink'
       patch 'manageartist'
       patch 'managevenue'
     end
@@ -28,16 +29,35 @@ Rails.application.routes.draw do
       get 'songfilter'
       get 'songsearch'
     end
+    member do
+      get 'managelink'
+    end
   end
 
-  resources :performers 
+  resources :performers do
+    member do
+      get 'managelink'
+    end
+    collection do
+      get 'performerfilter'
+      get 'performersearch'
+    end
+  end
 
   resources :individuals, :controller => "performers", :type => "Individual"
   resources :groups, :controller => "performers", :type => "Group" do
     resources :bands
   end
 
-  resources :venues
+  resources :venues do
+    member do
+      get 'managelink'
+    end
+    collection do
+      get 'venuefilter'
+      get 'venuesearch'
+    end
+  end 
   
  
 end

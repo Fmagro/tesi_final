@@ -1,0 +1,60 @@
+<h1>Concert</h1>
+
+<div class="infosection">
+  <p>
+    <strong>Date:</strong>
+    <%= @concert.cdate %>
+  </p>
+</div>
+
+<div class="infosection">
+  <h2>Venue: </h2>
+  <p> <%= @concert.venue.vname %>
+      <%= link_to "Show",  venue_path(@concert.venue) %>
+</div> 
+
+
+<div class="infosection">
+  <h2>Artists performing in this concert: </h2>
+  <table>
+    <tr>
+      <th>Name</th>
+      <th colspan="2"></th>
+    </tr>
+    <% @concert.performers.each do |performer| %>
+      <tr>
+        <td><%=  performer.pname %></td>
+        <td><%= link_to "Show", performer_path(performer) %></td>
+      </tr>  
+    <% end %>
+  </table>
+</div>
+ 
+
+<div class="infosection">
+  <h2>Setlist</h2>
+    <table>
+    <tr>
+      <th>Position</th>
+      <th>Title</th>
+      <th>Performers</th>
+      <th colspan="2"></th>
+    </tr>
+      <% @concert.performances.order("position").each do |performance| %>
+      <tr>
+        <td><%= performance.position %></td>
+        <td><%= performance.song.title %></td>
+        <td><table>
+        <% performance.performers.each do |performer| %>
+          <tr><td><%= performer.pname %></td></tr>
+        <% end %>
+        </table></td>
+        <td><%= link_to 'Show', song_path(performance.song) %></td>
+      </tr>  
+      <% end %>
+    </table>
+</div>
+<div class="afterinfosection">
+  <%= link_to 'Edit concert', edit_concert_path(@concert) %> 
+  <%= link_to 'Back', concerts_path %>
+</div>

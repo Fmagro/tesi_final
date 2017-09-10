@@ -1,5 +1,5 @@
 class ConcertsController < ApplicationController
-    http_basic_authenticate_with name:  Tesi::Application.config.usrname, password: Tesi::Application.config.pwd, except: [:show, :concertfilter, :concertsearch]
+    http_basic_authenticate_with name:  "admin", password: "12345", except: [:show, :concertfilter, :concertsearch]
 
   def index
     @concerts = Concert.all
@@ -19,11 +19,18 @@ class ConcertsController < ApplicationController
  
   def create
     @concert = Concert.new(concert_params)
+
     @venue = Venue.where(:id  => params[:venue_to_add]).first
       #@venue= @concert.venue
-    @concert.venue = @venue  
+    @concert.venue = @venue 
+
+    @performer = Performer.where(:id  => params[:artist_to_add])
+      #@venue= @concert.venue
+    @concert.performers << @performer  
+
     if @concert.save
-      redirect_to @concert
+      redirect_to managelink_concert_path(@concert)
+      #redirect_to new_concert_path(@concert)
     else
       render 'new'
     end
@@ -33,7 +40,7 @@ class ConcertsController < ApplicationController
     @concert = Concert.find(params[:id])
  
     if @concert.update(concert_params)
-      redirect_to @concert
+      redirect_to managelink_concert_path(@concert)
     else
       render 'edit'
     end
@@ -45,19 +52,32 @@ class ConcertsController < ApplicationController
  
     redirect_to concerts_path
   end
+ 
+  def managelink
+    @concert = Concert.find(params[:id])
+  end
 
 
   def manageartist
     @concert = Concert.find(params[:id])
     if params[:artist_add]
       @performer = Performer.where(:id  => params[:artist_to_add])
-      @concert.performers<< @performer 
+      if  @concert.performers.by_id(params[:artist_to_add]).count ==0
+        @concert.performers<< @performer        
+      end 
+
     end
+ 
     if (params[:artist_del])
-      @performerd = Performer.where(:id  => params[:artist_to_delete])
-      @concert.performers.delete(@performerd)
+      if @concert.performers.length >1
+        @performerd = Performer.where(:id  => params[:artist_to_delete]) 
+     
+        @concert.performers.delete(@performerd)
+        
+      end
+
     end
-    redirect_to @concert
+    redirect_to managelink_concert_path(@concert)
   end 
 
 
@@ -69,12 +89,13 @@ class ConcertsController < ApplicationController
 
       @venue = Venue.where(:id  => params[:venue_to_add]).first
       @concert.venue = @venue
+
+      if not @concert.update_attribute(:venue_id,params[:venue_to_add])
+        render 'managelink'
+      end
+
     end
-    if @concert.update_attribute(:venue_id,params[:venue_to_add])
-      redirect_to @concert
-    else
-      render 'show'
-    end
+    redirect_to managelink_concert_path(@concert)
   end 
  
  
@@ -84,11 +105,7 @@ class ConcertsController < ApplicationController
 
 
   def concertsearch
-@concerts =  Concert.select('*,concerts.id as concertid').before(params[:b_date]).after(params[:a_date]).group(:id)
-    #@concerts =  Concert.select('*,concerts.id as concertid, concerts.name as concertname').before(params[:b_date]).after(params[:a_date])
-    #@concerts=@concerts.joins(:venue).select('venues.name as venuename').by_venue(params[:venue_s]).by_city(params[:city_s]).by_country(params[:country_s])
-    #@concerts=@concerts.joins(:performers).by_performer(params[:performer_s])
-#    @concerts=@concerts.joins(:artists).select("artists.name as artistname").by_artist(params[:artist_s]).group(:id) 
+    @concerts =  Concert.select('*').before(params[:b_date]).after(params[:a_date]).joins(:venue).by_venue(params[:venue_s]).by_city(params[:city_s]).by_country(params[:country_s]).joins(:performers).by_performer(params[:artist_s]).group(:id) 
 
   end
  
@@ -97,4 +114,5 @@ class ConcertsController < ApplicationController
       params.require(:concert).permit(:cdate, :venue_id,   
 performances_attributes: [:id, :concert_id, :song_id, :position])
     end
+ 
 end

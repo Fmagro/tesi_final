@@ -1,0 +1,15 @@
+  <% if @performance.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@performance.errors.count, "error") %> prohibited
+        this concert from being saved:
+      </h2>
+      <ul>
+        <% @performance.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <p class="afterinfosection">  </p>
+  <% end %>
+ 

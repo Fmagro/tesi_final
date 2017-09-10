@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Tesi</title>
+    <title>Relive your concert</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -9,6 +9,29 @@
   </head>
 
   <body>
-    <%= yield %>
+    <div class="container">
+      <header>
+        <h1>Relive your Concert</h1>
+      </header>
+
+      <nav>
+        <ul>
+          <li><%= link_to 'Home', welcome_index_path %></li>
+          <li><%= link_to 'Concert', concertfilter_concerts_path %></li>
+          <li><%= link_to 'Song', songfilter_songs_path %></li>
+          <li><%= link_to 'Performers', performerfilter_performers_path %></li>
+          <li>  <%= link_to 'Venue', venuefilter_venues_path %><br></li>
+          <li><%= link_to 'Admin area', admin_index_path %></li>
+        </ul>
+      </nav>
+       
+      <div class="content">
+ 
+        <%= yield %> 
+ 
+      </div> 
+
+      <footer>Tesi  F. Magro</footer>
+    </div>
   </body>
 </html>

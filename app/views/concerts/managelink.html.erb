@@ -1,0 +1,137 @@
+<h1>Concert</h1>
+ 
+<%= render 'errors' %>
+
+<div class="infosection">
+  <p>
+    <strong>Date:</strong>
+    <%= @concert.cdate %>
+  </p>
+</div>
+
+<div class="infosection">
+  <h2>Venue: </h2>
+  <p> <%= @concert.venue.vname %>
+      <%= link_to "Show",  venue_path(@concert.venue) %>
+      <%= link_to "Manage link", managelink_venue_path(@concert.venue) %></p>
+
+  <%= form_for @concert, url: managevenue_concert_path(@concert) do |f| %>
+
+    <p><%= check_box_tag("venue_del") %>
+    <%= label_tag("venue_del", "Replace with another venue?") %>   <br>
+    </p>
+  
+    <p>
+    <%= select_tag "venue_to_add", options_from_collection_for_select(Venue.all, "id" , "vname") %>
+    <%= label_tag("Add this association") %><br>
+    </p>
+
+    <p><%= f.submit %></p>
+  <% end %>
+ 
+</div> 
+<div class="infosection">
+  <h2>Artists performing in this concert: </h2>
+  <table>
+    <tr>
+      <th>Name</th>
+      <th colspan="2"></th>
+    </tr>
+    <% @concert.performers.each do |performer| %>
+      <tr>
+        <td><%=  performer.pname %></td>
+        <td><%= link_to "Show", performer_path(performer) %></td>
+        <td><%= link_to "Manage link", managelink_performer_path(performer) %></td>
+      </tr>  
+    <% end %>
+  </table>
+
+  <%= form_for @concert, url: manageartist_concert_path(@concert) do |f| %>
+
+
+    <h4>Artists performing in this concert: </h4>
+    <p>
+      <%= select_tag "artist_to_add", options_from_collection_for_select(Performer.all, "id" , "pname") %>
+      <%= check_box_tag("artist_add") %>
+      <%= label_tag("artist_add", "Add this association") %><br>
+    </p>
+    <h4>Remove an artist from this concert:</h4>
+    <p>
+      <%= select_tag "artist_to_delete", options_from_collection_for_select(@concert.performers, "id" , "pname") %>
+      <%= check_box_tag("artist_del") %>
+      <%= label_tag("artist_del", "Remove this association") %><br>
+    </p>
+    <p>    <%= f.submit %>  </p>
+    <h6>* A concert must have at least one performer</h6>
+
+  <% end %>
+</div>
+ 
+
+  <div class=afterinfosection ></div> 
+
+
+<div class="infosection">
+  <h2>Setlist</h2>
+    <table>
+    <tr>
+      <th>Position</th>
+      <th>Title</th>
+      <th>Performers</th>
+      <th colspan="2"></th>
+    </tr>
+      <% @concert.performances.order("position").each do |performance| %>
+      <tr>
+        <td><%= performance.position %></td>
+        <td><%= performance.song.title %></td>
+        <td><table>
+
+          <% performance.performers.each do |performer| %>
+    
+            <tr><td><%= performer.pname %></td></tr>
+          <% end %>
+
+        </table></td>
+        <td><%= link_to 'Show', song_path(performance.song) %></td>
+        <td><%= link_to 'Manage link', managelink_song_path(performance.song) %></td>
+        <td><%= link_to 'Destroy link', concert_performance_path(@concert,performance),
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %></td>
+        <td>
+
+
+          <%= link_to 'Add/Remove a performer', manageperformer_concert_performance_path(@concert,performance) %>
+         
+
+
+        </td>
+
+      </tr>  
+      <% end %>
+    </table>
+    <td><%= link_to 'Edit', edit_concert_path(@concert) %></td>
+   <h6> * A concert must have at least one song </h6>
+
+  <h2>Add a song to the setlist:</h2>
+  <%= form_for([@concert, @concert.performances.build]) do |f| %>
+    <p>
+    <%= f.select :song_id, Song.all.collect{ |p| [p.title, p.id] } %><br>
+      </p>
+      <%= link_to 'Add a new Song?', new_song_path %> 
+      <p>
+        <%= f.submit %>
+      </p>
+    <% end %>
+</div>
+
+
+<div class="afterinfosection"> </div>
+
+<div class="nextsection" >
+  <p> * Please remember to add all the members to the group and all the performers to the performances</p>
+</div>
+
+<div class="afternextsection" >
+  <%= link_to 'Edit concert', edit_concert_path(@concert) %> 
+  <%= link_to 'Concert index', concerts_path %>
+</div>

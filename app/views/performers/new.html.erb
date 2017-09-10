@@ -1,0 +1,46 @@
+<h1>New performer</h1>
+
+
+  
+<%= form_for @performer do |f| %>
+   
+  <%= render 'errors'%>
+<div class="infosection">
+  <%= render 'performerinfo', f: f %>
+
+  <% if @performer.type == "Group" %>
+    <h2> Add the first member to the group:   </h2>
+      <%# @group = @performer %>
+      <%= f.fields_for :bands, @performer.bands.build do |ff| %>
+        <p>
+          <%= ff.select :individual_id, Performer.where(:type => "Individual").collect{ |p| [p.pname, p.id] } %><br>
+        </p>
+        <p>
+          <h5> Joining date </h5>
+          <%= ff.date_field :joining %>
+        </p>
+        <p>
+          <h5> Leaving date </h5>
+          <%= ff.date_field :leaving %>
+        </p>
+         <% end %>   
+  <% end %>
+
+  <p>
+    <%= f.submit %>
+  </p>
+  </div>
+
+<% end %>
+
+ 
+<div class=nextsection >
+  <p> GUIDED DATA ENTRY </p>
+  <%= link_to "New song", new_song_path %> | 
+  <%= link_to "New individual", new_individual_path %> | 
+  <%= link_to "New group", new_group_path %>
+</div>
+
+<div class="afterinfosection">
+<%= link_to 'Performer index', performers_path %>
+</div>

@@ -1,0 +1,24 @@
+<h1> Song </h1>
+
+
+<div class="infosection" >
+  <p>
+    <strong>Title:</strong>
+    <%= @song.title %>
+  </p>
+ 
+  <p>
+    <strong>Genre:</strong>
+    <%= @song.genre %>
+  </p>
+</div> 
+
+<!-- If a youtube id has been given then it embeds the appropriate video width 480 height 270 -->
+<% if @song.ytid.present?%> 
+  <div class="iframesection" >
+    <iframe id="player" type="text/html" width="480" height="270"src="http://www.youtube.com/embed/<%= @song.ytid %>?enablejsapi=1&origin=http://example.com"
+  frameborder="0"></iframe> 
+  
+    <br>
+  </div>
+<% end %>

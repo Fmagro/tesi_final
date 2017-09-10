@@ -1,2 +1,41 @@
-<h1>Admin#index</h1>
-<p>Find me in app/views/admin/index.html.erb</p>
+<h1>Admin area</h1>
+
+
+<div class=nextsection >
+  <p> GUIDED DATA ENTRY </p>
+  <%= link_to "New venue", new_venue_path %>
+
+</div>
+
+<div class=afternextsection >
+<p> </p>
+</div>
+
+<div class=infosection >
+  <%= link_to "Concert Index", concerts_path %>
+  <br>
+  <%= link_to 'Search for concerts', concertfilter_concerts_path %><br>
+</div>
+
+
+<div class=infosection >
+  <%= link_to "Song Index", songs_path %>
+  <br>
+  <%= link_to 'Search for songs', songfilter_songs_path %><br>
+
+</div>
+
+<div class=infosection >
+  <%= link_to "Performer Index", performers_path %>
+  <br>
+  <%= link_to 'Search for performers', performerfilter_performers_path %><br>
+</div>
+
+
+<div class=infosection >
+  <%= link_to "Venue Index", venues_path %>
+  <br>
+  <%= link_to 'Search for venues', venuefilter_venues_path %><br>
+</div>
+
+

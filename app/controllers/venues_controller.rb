@@ -1,8 +1,6 @@
 class VenuesController < ApplicationController
 
-
-
-  http_basic_authenticate_with name: Tesi::Application.config.usrname.to_s, password: Tesi::Application.config.pwd.to_s, except: [:show]
+  http_basic_authenticate_with name: "admin", password: "12345", except: [:show]
   def index
     @venues = Venue.all
   end
@@ -23,7 +21,7 @@ class VenuesController < ApplicationController
     @venue = Venue.new(venue_params)
  
     if @venue.save
-      redirect_to @venue
+      redirect_to new_venue_path(@venue)
     else
       render 'new'
     end
@@ -33,7 +31,7 @@ class VenuesController < ApplicationController
     @venue = Venue.find(params[:id])
  
     if @venue.update(venue_params)
-      redirect_to @venue
+      redirect_to managelink_venue_path(@venue)
     else
       render 'edit'
     end
@@ -45,7 +43,21 @@ class VenuesController < ApplicationController
  
     redirect_to venues_path
   end
+
+  def managelink
+    @venue = Venue.find(params[:id]) 
+  end
  
+  def venuefilter
+    @venues = Venue.all    
+  end
+
+
+  def  venuesearch
+    @venues =  Venue.select('*').by_venue(params[:venue_s]).by_city(params[:city_s]).by_country(params[:country_s]).group(:id)
+
+
+  end 
   private
     def venue_params
       params.require(:venue).permit(:vname, :address, :city, :country)

@@ -1,5 +1,5 @@
 class SongsController < ApplicationController
-    http_basic_authenticate_with name:  Tesi::Application.config.usrname, password: Tesi::Application.config.pwd, except: [:show, :songfilter, :songsearch]
+    http_basic_authenticate_with name:  "admin", password: "12345", except: [:show, :songfilter, :songsearch]
   def index
     @songs = Song.all
   end
@@ -20,7 +20,7 @@ class SongsController < ApplicationController
     @song = Song.new(song_params)
  
     if @song.save
-      redirect_to @song
+      redirect_to new_song_path(@song)
     else
       render 'new'
     end
@@ -30,7 +30,7 @@ class SongsController < ApplicationController
     @song = Song.find(params[:id])
  
     if @song.update(song_params)
-      redirect_to @song
+      redirect_to managelink_song_path(@song)
     else
       render 'edit'
     end
@@ -43,14 +43,16 @@ class SongsController < ApplicationController
     redirect_to songs_path
   end
 
+  def managelink
+    @song = Song.find(params[:id])
+  end
+
   def songfilter
     @songs = Song.all 
   end
 
   def songsearch
-    @songs = Song.by_title(params[:title_s]).by_genre(params[:genre_s]) 
-    #@songs = @songs.by_genre(params[:genre_s])
-     @songs = @songs.joins(:performers).by_artist(params[:artist_s]).group(:id)  
+    @songs = Song.by_title(params[:title_s]).by_genre(params[:genre_s])
   
   end
  

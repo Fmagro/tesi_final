@@ -1,0 +1,27 @@
+<h1>Edit concert</h1>
+ 
+<%= form_for @concert do |f| %>
+ 
+<%= render 'errors' %>
+
+<div class="infosection"> 
+<%= render 'concertinfo', f: f %>
+
+<h2>Setlist</h2>
+  <% @concert.performances.each do |performance| %> 
+     <%= f.fields_for :performances, performance do |ff| %>
+     <%= ff.number_field :position %> 
+
+      <%=performance.song.title%>
+<br>
+     <% end %>
+   <% end %>
+  <p>
+    <%= f.submit %>
+  </p>
+</div>
+<% end %>
+
+<div class="afterinfosection">
+<%= link_to 'Concert index', concerts_path %>
+</div>

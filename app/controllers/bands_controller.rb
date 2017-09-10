@@ -1,6 +1,6 @@
 class BandsController < ApplicationController
 
-  http_basic_authenticate_with name:  Tesi::Application.config.usrname, password: Tesi::Application.config.pwd, except: [:show]
+  http_basic_authenticate_with name:  "admin", password: "12345", except: [:show]
 
   def index
     @bands = Band.all
@@ -28,11 +28,12 @@ class BandsController < ApplicationController
     @band = @group.bands.create(band_params)
 
     if @band.save
-      redirect_to performer_path(@group)
+      redirect_to managelink_performer_path(@group)
     else
  
      @performer = Performer.find(params[:group_id])
-     render 'performers/show'
+     @group = @performer
+     render 'performers/managelink'
     end
   end
 
@@ -40,7 +41,7 @@ class BandsController < ApplicationController
     @group = Performer.find(params[:performer_id])
     @band = @group.find(params[:id])
     if @band.update(band_params)
-      redirect_to_edit_performer_path(@group)
+      redirect_to edit_performer_path(@group)
     else 
       render 'edit' 
     end
@@ -48,9 +49,10 @@ class BandsController < ApplicationController
  
   def destroy
     @band = Band.find(params[:id])
-    @band.destroy
- 
-    redirect_to performances_path
+    if @band.group.bands.length >1 
+      @band.destroy
+    end
+    redirect_to managelink_performer_path(@band.group)
   end
  
   private
