@@ -1,5 +1,5 @@
 class PerformersController < ApplicationController
-    http_basic_authenticate_with name:  "admin", password: "12345", except: [:show]
+    http_basic_authenticate_with name:  "admin", password: "12345", except: [:show, :performerfilter, :performersearch]
   def index
     @performers = Performer.all
   end

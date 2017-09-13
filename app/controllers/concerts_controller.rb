@@ -20,10 +20,12 @@ class ConcertsController < ApplicationController
   def create
     @concert = Concert.new(concert_params)
 
-    @venue = Venue.where(:id  => params[:venue_to_add]).first
-      #@venue= @concert.venue
-    @concert.venue = @venue 
-
+    if (params[:v_name_add].present? && params[:v_city_add].present? && params[:v_country_add].present?)
+      @venue = Venue.where(:vname  => params[:v_name_add]).where(:city  => params[:v_city_add]).where(:country  => params[:v_country_add]).first
+      if not @venue.nil?
+        @concert.venue = @venue 
+      end
+    end
     @performer = Performer.where(:id  => params[:artist_to_add])
       #@venue= @concert.venue
     @concert.performers << @performer  
@@ -83,19 +85,17 @@ class ConcertsController < ApplicationController
 
   def managevenue
     @concert = Concert.find(params[:id])
-
-    if (params[:venue_del])
-     #@venued = Venue.where(:id  => params[:venue_to_delete])
-
-      @venue = Venue.where(:id  => params[:venue_to_add]).first
-      @concert.venue = @venue
-
-      if not @concert.update_attribute(:venue_id,params[:venue_to_add])
-        render 'managelink'
+    if (params[:v_name_add].present? && params[:v_city_add].present? && params[:v_country_add].present?)
+      @venue = Venue.where(:vname  => params[:v_name_add]).where(:city  => params[:v_city_add]).where(:country  => params[:v_country_add]).first
+      if not @venue.nil?
+        @concert.venue = @venue
       end
-
     end
-    redirect_to managelink_concert_path(@concert)
+    if ((not @venue.nil?) && (@concert.update_attribute(:venue_id,@venue.id)))
+      redirect_to managelink_concert_path(@concert)
+    else
+      render 'managelink' 
+    end 
   end 
  
  

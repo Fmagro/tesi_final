@@ -13,9 +13,21 @@
   <!-- Force the admin to add at least one instance of each associated model  -->
 
   <h2>Venue for this concert: </h2>
-    <p><%= select_tag "venue_to_add", options_from_collection_for_select(Venue.all, "id" , "vname") %><br>
-    </p>
+  <table>
+    <tr>
+      <td><%= label_tag(:v_name_add, "Name:   ") %></td> 
+       <td><%= text_field_tag(:v_name_add) %></td>   
+    </tr>
+    <tr>
+       <td><%= label_tag(:v_city_add, "City:  ") %></td> 
+       <td><%= text_field_tag(:v_city_add) %></td>   
+    </tr>
+    <tr>
+       <td><%= label_tag(:v_country_add, "Country:") %></td> 
+       <td><%= text_field_tag(:v_country_add) %></td>   
+    </tr>
 
+   </table>
 
   <h2>Add the first performer: </h2>
     <p>
@@ -23,7 +35,8 @@
     </p>
 
   <h2>Add the first song: </h2>
-    <%= f.fields_for :performances, create: @concert.performances.build do |ff| %>
+    <%#= f.fields_for :performances, create: @concert.performances.build do |ff| %>
+    <%= f.fields_for :performances,  @concert.performances.build do |ff| %>
       <p>
       <%= ff.select :song_id, Song.all.collect{ |p| [p.title, p.id] } %><br>
       </p>

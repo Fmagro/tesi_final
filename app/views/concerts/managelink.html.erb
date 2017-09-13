@@ -11,22 +11,30 @@
 
 <div class="infosection">
   <h2>Venue: </h2>
-  <p> <%= @concert.venue.vname %>
-      <%= link_to "Show",  venue_path(@concert.venue) %>
+  <p> 
+      <%= link_to @concert.venue.vname,  venue_path(@concert.venue) %>
+      <%= @concert.venue.city %>
+      <%= @concert.venue.country %>
       <%= link_to "Manage link", managelink_venue_path(@concert.venue) %></p>
 
   <%= form_for @concert, url: managevenue_concert_path(@concert) do |f| %>
 
-    <p><%= check_box_tag("venue_del") %>
-    <%= label_tag("venue_del", "Replace with another venue?") %>   <br>
-    </p>
-  
-    <p>
-    <%= select_tag "venue_to_add", options_from_collection_for_select(Venue.all, "id" , "vname") %>
-    <%= label_tag("Add this association") %><br>
-    </p>
+  <table>
+    <tr>
+      <td><%= label_tag(:v_name_add, "Name:   ") %></td> 
+       <td><%= text_field_tag(:v_name_add) %></td>   
+    </tr>
+    <tr>
+       <td><%= label_tag(:v_city_add, "City:  ") %></td> 
+       <td><%= text_field_tag(:v_city_add) %></td>   
+    </tr>
+    <tr>
+       <td><%= label_tag(:v_country_add, "Country:") %></td> 
+       <td><%= text_field_tag(:v_country_add) %></td>   
+    </tr>
 
-    <p><%= f.submit %></p>
+   </table>
+    <p><%= f.submit "Replace Venue" %></p>
   <% end %>
  
 </div> 
