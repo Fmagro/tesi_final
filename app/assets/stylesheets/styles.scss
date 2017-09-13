@@ -76,6 +76,16 @@ nav.active {
     background-color: #273a61;
 }
 
+
+nav li a:visited {
+    color: #273a61;
+}
+
+a:visited {
+    color: #021d46;
+}
+
+
 h1 {
     margin-left: 0.4em;
 }
@@ -87,6 +97,7 @@ h1 {
     background-image: url('/assets/concert_home.jpeg');
     background-size: cover;
     background-color:rgba(255,255,255,0.5);*/
+
     min-height: 66vh; 
     padding: 1em;
     overflow: auto;
@@ -169,6 +180,39 @@ h1 {
     margin-left: 0.8em;
 }
 
+.adminarea{
+/*    display: inline-block;
+    border: 1px solid #273a61;
+    width: 40vw;
+    min-height: 20vh;
+    background-color: #e4ebf6;*/
+    float: left;
+    /*display: inline-block;*/
+    text-align: center;
+    margin: 0.8em;
+    min-width: 42vw;
+    padding: 0.8em;
+    padding-top: 1.5em;
+    min-height: 5em;
+    line-height: 1.8em;
+    text-color:#B47746;
+    border: 1px solid #273a61;
+    box-shadow:10px 10px 5px grey;
+
+}
+
+.indentation {
+ 
+    margin-left: 0.8em;
+
+    /*padding: 0.8em;*/
 
 
+}
+table {
+    margin-left:0.4em;
+}
 
+table th {
+    text-align: left;
+}

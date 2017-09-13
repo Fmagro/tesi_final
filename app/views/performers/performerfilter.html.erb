@@ -1,6 +1,6 @@
 <h1>Search for a performer: </h1>
 <%= form_tag url_for(:controller => "performers", :action => "performersearch"), :method => "get" do %>
- 
+ <div class=indentation>
   <p>
   <%= label_tag(:name_s, "Performer:") %>
   <%= text_field_tag(:name_s) %>
@@ -9,5 +9,5 @@
   <p>
   <%= submit_tag("Search") %>
   </p>
-
+ </div>
 <% end %>
