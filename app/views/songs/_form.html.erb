@@ -17,12 +17,12 @@
  
   <div class="infosection">
   <p>
-    <%= f.label :title %><br>
+    <%= f.label :title, "Title:" %><br>
     <%= f.text_field :title %>
   </p>
  
   <p>
-    <%= f.label :genre %><br>
+    <%= f.label :genre, "Genre:" %><br>
    <%= f.select :genre, Song.all_genres.to_a %><br>
   </p>
  

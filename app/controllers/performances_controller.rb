@@ -35,14 +35,14 @@ class PerformancesController < ApplicationController
   end
  
   def update
-    #@performance = Performance.find(params[:id])
     @concert = Concert.find(params[:concert_id])
-    @performance = @concert.performance.find(params[:id])
-    if @performance.position != nil
+    @performance = @concert.performances.find(params[:id])
+
+    #if @performance.position != nil
       if @performance.update(performance_params)
         redirect_to edit_concert_path(@concert)
       end
-    end
+    #end
     render 'concerts/edit'
   end
  

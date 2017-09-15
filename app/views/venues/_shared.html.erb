@@ -1,5 +1,9 @@
 <h1>Venue</h1>
-<div class="infosection">
+
+
+
+
+<div id="nextmap">
 <p>
   <strong>Name:</strong>
   <%= @venue.vname %>
@@ -19,8 +23,6 @@
   <%= @venue.country %>
 </p>
 </div>
-
-
 <!-- Embedded Google Map -->
 <iframe class="iframesection"
   width="400"
@@ -30,4 +32,7 @@
     &q=<%= @venue.address %>,<%= @venue.city %>,<%= @venue.country %>" allowfullscreen>
 </iframe>
 
+
+<div class="afterinfosection">
+</div>
 

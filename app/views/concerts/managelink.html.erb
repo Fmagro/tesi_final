@@ -43,13 +43,12 @@
   <table>
     <tr>
       <th>Name</th>
-      <th colspan="2"></th>
+      <th colspan="1"></th>
     </tr>
     <% @concert.performers.each do |performer| %>
       <tr>
-        <td><%=  performer.pname %></td>
-        <td><%= link_to "Show", performer_path(performer) %></td>
-        <td><%= link_to "Manage link", managelink_performer_path(performer) %></td>
+        <td><%= link_to performer.pname, performer_path(performer) %></td>
+        <td><%= link_to "Performer Manage link", managelink_performer_path(performer) %></td>
       </tr>  
     <% end %>
   </table>
@@ -57,13 +56,13 @@
   <%= form_for @concert, url: manageartist_concert_path(@concert) do |f| %>
 
 
-    <h4>Artists performing in this concert: </h4>
+    <h4>Add a performer to this concert: </h4>
     <p>
       <%= select_tag "artist_to_add", options_from_collection_for_select(Performer.all, "id" , "pname") %>
       <%= check_box_tag("artist_add") %>
       <%= label_tag("artist_add", "Add this association") %><br>
     </p>
-    <h4>Remove an artist from this concert:</h4>
+    <h4>Remove a performer from this concert:</h4>
     <p>
       <%= select_tag "artist_to_delete", options_from_collection_for_select(@concert.performers, "id" , "pname") %>
       <%= check_box_tag("artist_del") %>
@@ -91,33 +90,24 @@
       <% @concert.performances.order("position").each do |performance| %>
       <tr>
         <td><%= performance.position %></td>
-        <td><%= performance.song.title %></td>
+        <td><%= link_to performance.song.title, managelink_song_path(performance.song) %></td>
         <td><table>
 
           <% performance.performers.each do |performer| %>
     
-            <tr><td><%= performer.pname %></td></tr>
+            <tr><td><%= link_to performer.pname, managelink_performer_path(performer) %></td></tr>
           <% end %>
 
         </table></td>
-        <td><%= link_to 'Show', song_path(performance.song) %></td>
-        <td><%= link_to 'Manage link', managelink_song_path(performance.song) %></td>
-        <td><%= link_to 'Destroy link', concert_performance_path(@concert,performance),
+        <td><%= link_to 'Remove Performance', concert_performance_path(@concert,performance),
               method: :delete,
               data: { confirm: 'Are you sure?' } %></td>
-        <td>
-
-
-          <%= link_to 'Add/Remove a performer', manageperformer_concert_performance_path(@concert,performance) %>
-         
-
-
-        </td>
+        <td><%= link_to 'Add/Remove a performer', manageperformer_concert_performance_path(@concert,performance) %></td>
 
       </tr>  
       <% end %>
     </table>
-    <td><%= link_to 'Edit', edit_concert_path(@concert) %></td>
+    <td><%= link_to 'Edit Concert', edit_concert_path(@concert) %></td>
    <h6> * A concert must have at least one song </h6>
 
   <h2>Add a song to the setlist:</h2>
@@ -140,6 +130,6 @@
 </div>
 
 <div class="afternextsection" >
-  <%= link_to 'Edit concert', edit_concert_path(@concert) %> 
+  <%= link_to 'Edit concert', edit_concert_path(@concert) %> | 
   <%= link_to 'Concert index', concerts_path %>
 </div>

@@ -2,15 +2,17 @@
 
 <div class="infosection">
   <p>
-    <strong>Date:</strong>
+    <h2>Date:</h2>
     <%= @concert.cdate %>
   </p>
 </div>
 
 <div class="infosection">
   <h2>Venue: </h2>
-  <p> <%= @concert.venue.vname %>
-      <%= link_to "Show",  venue_path(@concert.venue) %>
+  <%= link_to @concert.venue.vname,  venue_path(@concert.venue) %> 
+  <%= @concert.venue.address %> -
+  <%= @concert.venue.city %>, 
+  <%= @concert.venue.country %>
 </div> 
 
 
@@ -19,12 +21,11 @@
   <table>
     <tr>
       <th>Name</th>
-      <th colspan="2"></th>
+
     </tr>
     <% @concert.performers.each do |performer| %>
       <tr>
-        <td><%=  performer.pname %></td>
-        <td><%= link_to "Show", performer_path(performer) %></td>
+        <td><%= link_to performer.pname, performer_path(performer) %></td>
       </tr>  
     <% end %>
   </table>
@@ -38,23 +39,20 @@
       <th>Position</th>
       <th>Title</th>
       <th>Performers</th>
-      <th colspan="2"></th>
     </tr>
       <% @concert.performances.order("position").each do |performance| %>
       <tr>
         <td><%= performance.position %></td>
-        <td><%= performance.song.title %></td>
+        <td><%= link_to performance.song.title, song_path(performance.song)  %></td>
         <td><table>
         <% performance.performers.each do |performer| %>
-          <tr><td><%= performer.pname %></td></tr>
+          <tr>        <td><%= link_to performer.pname, performer_path(performer) %></td></tr>
         <% end %>
         </table></td>
-        <td><%= link_to 'Show', song_path(performance.song) %></td>
+
       </tr>  
       <% end %>
     </table>
 </div>
 <div class="afterinfosection">
-  <%= link_to 'Edit concert', edit_concert_path(@concert) %> 
-  <%= link_to 'Back', concerts_path %>
 </div>

@@ -33,13 +33,13 @@
       <td>
         <table>
           <% performance.concert.performers.each do |p| %>
-            <tr>  <td> <%= p.pname %> </td> </tr> 
+            <tr>  <td> <%= link_to p.pname, performer_path(p) %> </td> </tr> 
           <% end %>
         </table> 
       </td> 
       <td> <%= performance.concert.cdate %> </td>
-      <td> <%= performance.concert.venue.vname %> </td>
-      <td><%= link_to "Concert", concert_path(performance.concert) %></td> 
+      <td> <%= link_to performance.concert.venue.vname, venue_path(performance.concert.venue) %> </td>
+      <td><%= link_to "Show Concert", concert_path(performance.concert) %></td> 
     </tr>  
     <% end %>
   </table>

@@ -109,7 +109,7 @@ h1 {
     width: 40vw;
     min-height: 20vh;
     background-color: #e4ebf6;*/
-    float: left;
+    /*float: left;*/
     /*display: inline-block;*/
     margin: 0.8em;
     min-width: 42vw;
@@ -141,7 +141,7 @@ h1 {
 }
 
 #error_explanation{
-    display: inline-block;
+    /*display: inline-block;*/
     border: 3px solid #FF0004;
     width: 40vw;
     min-height: 20vh;
@@ -209,10 +209,34 @@ h1 {
 
 
 }
+
+#nextmap {
+/*    display: inline-block;
+    border: 1px solid #273a61;
+    width: 40vw;
+    min-height: 20vh;
+    background-color: #e4ebf6;*/
+    float: left;
+    /*display: inline-block;*/
+    margin: 0.8em;
+    min-width: 42vw;
+    padding: 0.8em;
+    height: 43vh;
+    border: 1px solid #273a61;
+    box-shadow:10px 10px 5px grey;
+
+}
+
 table {
-    margin-left:0.4em;
+    margin-left:0.5em;
+    padding-top:0.3em;
 }
 
 table th {
     text-align: left;
 }
+
+table td {
+    padding-right: 0.5em;
+}
+

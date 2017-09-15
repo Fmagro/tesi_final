@@ -5,14 +5,13 @@
   <table>
   <tr>
     <th>Name</th>
-    <th colspan="2"></th>
+    <th colspan="1"></th>
   </tr>
   <% @song.performances.each do |performance| %>
     <% performance.performers.each do |performer| %>
     <tr>
-      <td><%= performer.pname %></td>
-      <td><%= link_to 'Show', performer_path(performer) %></td>
-      <td><%= link_to 'Manage Link', managelink_performer_path(performer) %></td>
+      <td><%= link_to performer.pname, performer_path(performer) %></td>
+      <td><%= link_to 'Performer Manage Link', managelink_performer_path(performer) %></td>
     </tr> 
     <% end %> 
   <% end %>
@@ -20,8 +19,7 @@
 </div>
 
 <div class="infosection" >
-<h2>Concerts where this </h2>
-<h2>song was performed: </h2>
+<h2>Concerts where this song was performed: </h2>
   <table>
     <tr>  
       <th>Performers</th>  
@@ -34,14 +32,14 @@
       <td>
         <table>
           <% performance.concert.performers.each do |p| %>
-            <tr>  <td> <%= p.pname %> </td> </tr> 
+            <tr>  <td> <%= link_to p.pname, managelink_performer_path(p) %> </td> </tr> 
           <% end %>
         </table> 
       </td> 
       <td> <%= performance.concert.cdate %> </td>
-      <td> <%= performance.concert.venue.vname %> </td>
-      <td><%= link_to "Show", concert_path(performance.concert) %></td> 
-      <td><%= link_to "Manage Link", managelink_concert_path(performance.concert) %></td> 
+      <td> <%= link_to performance.concert.venue.vname, managelink_venue_path(performance.concert.venue) %> </td>
+      <td><%= link_to "Show Concert", concert_path(performance.concert) %></td> 
+      <td><%= link_to "Concert Manage Link", managelink_concert_path(performance.concert) %></td> 
     </tr>  
     <% end %>
   </table>
@@ -49,8 +47,7 @@
 </div>
 
 <div class="afterinfosection" >
-<%= link_to 'Edit', edit_song_path(@song) %> |
 <%= link_to 'Add another song', new_song_path %> |
-<%= link_to 'Concert index', concerts_path %> |
-<%= link_to 'Back', songs_path %>
+<%= link_to 'Edit Song', edit_song_path(@song) %> |
+<%= link_to 'Song index', songs_path %> 
 </div>
