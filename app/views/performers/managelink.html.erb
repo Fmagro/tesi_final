@@ -17,10 +17,10 @@
   </div>
 
     <div class="infosection" > 
+    <!--  Group of performers -->
     <% if @performer.type == "Group" %>
       <h2>Group of performers     </h2>
 
-      
       <h3>Members of the group</h3>
       <table>
         <tr>
@@ -29,26 +29,43 @@
         <th>Leaving date</th>
         <th colspan="3"></th>
       </tr>
-
-
       <% @performer.bands.each do |band| %>
         <tr>
-        <td><%= band.individual.pname %></td>
+        <td><%= link_to band.individual.pname, performer_path(band.individual) %></td>
         <td><%= band.joining %></td>
         <td><%= band.leaving %></td>
         <td><%= link_to 'Edit', edit_performer_path(band.individual) %></td>
-        <td><%= link_to 'Manage link', managelink_performer_path(band.individual) %></td>
-        <td><%= link_to 'Destroy link', group_band_path(@performer,band),
+        <td><%= link_to 'Performer Manage link', managelink_performer_path(band.individual) %></td>
+        <td><%= link_to 'Remove this member', group_band_path(@performer,band),
               method: :delete,
               data: { confirm: 'Are you sure?' } %></td>
       </tr>  
       <% end %>
 
       </table>
+      <h2> Add a member to the group:   </h2>
+
+      <%= form_for([@performer, @performer.bands.build])  do |ff| %>
+        <p>
+          <%= ff.select :individual_id, Performer.where(:type => "Individual").collect{ |p| [p.pname, p.id] } %><br>
+        </p>
+        <p>
+          <%= ff.label :joining, "Joining date:" %><br>
+          <%= ff.date_field :joining %>
+        </p>
+        <p>
+          <%= ff.label :leaving, "Leaving date:" %><br>
+          <%= ff.date_field :leaving %>
+        </p>
+
+        <p>
+        <%= ff.submit %>
+        </p>
+       <% end %>
       <h6>* A group must have at least one member.  </h6>
     
     <% else %>   
-
+      <!--  Single performer -->
       <h2> Single performer</h2>
       <h3> Belongs to the following groups </h3>
       <table>
@@ -62,11 +79,11 @@
 
       <% @performer.bands.each do |band| %>
         <tr>
-          <td><%= band.group.pname %></td>
+          <td><%= link_to band.group.pname, performer_path(band.group) %></td>
           <td><%= band.joining %></td>
           <td><%= band.leaving %></td>
           <td><%= link_to 'Edit', edit_performer_path(band.group) %></td>
-          <td><%= link_to 'Manage link', managelink_performer_path(band.group) %></td>
+          <td><%= link_to 'Performer Manage link', managelink_performer_path(band.group) %></td>
         </tr>  
       <% end %>
 
@@ -76,79 +93,6 @@
   </div>
 
 
-<% if false%>
----------------------------------------------
-  <h2>Songs played by the performer </h2>
-    <table>
-    <tr>
-      <th>Title</th>
-      <th>Genre</th>
-
-    </tr>
-    <% @performer.songs.each do |song| %>
-      <tr>
-        <td><%= link_to song.title, song_path(song) %></td>
-        <td><%= song.genre %></td>
-
-      
-      </tr>  
-    <% end %>
-  </table>
-
-<%= form_for @performer, url: managesong_performer_path(@performer) do |f| %>
-
-
- <h4>Songs played by the performer:</h4>
- <p>
-   <%= select_tag "song_to_add", options_from_collection_for_select(Song.all, "id" , "title") %>
-<%= check_box_tag("song_add") %>
-<%= label_tag("song_add", "Add this association") %>
-<br>
-  </p>
-<h4>Remove a song played by the performer:</h4>
-<p>
-  <%= select_tag "song_to_delete", options_from_collection_for_select(@performer.songs, "id" , "title") %>
-<%= check_box_tag("song_del") %>
-<%= label_tag("song_del", "Remove this association") %>
-
-<br>
-  </p>
-  <p>
-    <%= f.submit %>
-  </p>
-
-
-<% end %>
-------------------------------------------
-<% end %>
-
-
-    <% if @performer.type == 'Group' %>  
-    <div class="infosection" > 
-      <h2> Add a member to the group:   </h2>
-
-      <%= form_for([@performer, @performer.bands.build])  do |ff| %>
-        <p>
-          <%= ff.select :individual_id, Performer.where(:type => "Individual").collect{ |p| [p.pname, p.id] } %><br>
-        </p>
-        <p>
-          <h5> Joining date </h5>
-          <%= ff.date_field :joining %>
-        </p>
-        <p>
-          <h5> Leaving date </h5>
-          <%= ff.date_field :leaving %>
-        </p>
-
- 
-
-        <p>
-        <%= ff.submit %>
-        </p>
-       <% end %>
-     </div>	
-     <% end %>	
-
 
 <div class="infosection" >
 <h2>Concerts held by this performer: </h2>
@@ -156,11 +100,13 @@
   <tr>
     <th>Date</th>
     <th>Venue</th>
+    <th colspan="1"></th
   </tr>
   <% @performer.concerts.each do |concert| %>
     <tr>
       <td><%= concert.cdate %></td>
-      <td><%= concert.venue.vname %></td>
+      <td><%= link_to concert.venue.vname,managelink_venue_path(concert.venue) %></td>
+      <td><%= link_to 'Concert Manage link', managelink_concert_path(concert) %></td>
     </tr>  
   <% end %>
 </table>
@@ -168,5 +114,5 @@
 
 <div class="afterinfosection" >
 <%= link_to 'Edit', edit_performer_path(@performer) %> |
-<%= link_to 'Add a new single performer', new_individual_path %> |<%= link_to 'Add a new group of performers', new_group_path %> |
+<%= link_to 'Add a new single performer', new_individual_path %> |<%= link_to 'Add a new group of performers', new_group_path %> 
 </div>

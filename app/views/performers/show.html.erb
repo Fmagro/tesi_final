@@ -27,16 +27,15 @@
         <th>Name</th>
         <th>Joining date</th>
         <th>Leaving date</th>
-        <th colspan="1"></th>
       </tr>
 
 
       <% @performer.bands.each do |band| %>
         <tr>
-        <td><%= band.individual.pname %></td>
+        <td><%= link_to band.individual.pname, performer_path(band.individual) %></td>
         <td><%= band.joining %></td>
         <td><%= band.leaving %></td>
-        <td><%= link_to 'Show', performer_path(band.individual) %></td>
+        
 
       </tr>  
       <% end %>
@@ -59,64 +58,15 @@
 
       <% @performer.bands.each do |band| %>
         <tr>
-          <td><%= band.group.pname %></td>
+          <td><%= link_to band.group.pname, performer_path(band.group) %></td>
           <td><%= band.joining %></td>
           <td><%= band.leaving %></td>
-        <td><%= link_to 'Show', performer_path(band.group) %></td>
         </tr>  
       <% end %>
 
       </table>
     </div>
     <% end %>
-
-
-
-<% if false%>
----------------------------------------------
-  <h2>Songs played by the performer </h2>
-    <table>
-    <tr>
-      <th>Title</th>
-      <th>Genre</th>
-
-    </tr>
-    <% @performer.songs.each do |song| %>
-      <tr>
-        <td><%= link_to song.title, song_path(song) %></td>
-        <td><%= song.genre %></td>
-
-      
-      </tr>  
-    <% end %>
-  </table>
-
-<%= form_for @performer, url: managesong_performer_path(@performer) do |f| %>
-
-
- <h4>Songs played by the performer:</h4>
- <p>
-   <%= select_tag "song_to_add", options_from_collection_for_select(Song.all, "id" , "title") %>
-<%= check_box_tag("song_add") %>
-<%= label_tag("song_add", "Add this association") %>
-<br>
-  </p>
-<h4>Remove a song played by the performer:</h4>
-<p>
-  <%= select_tag "song_to_delete", options_from_collection_for_select(@performer.songs, "id" , "title") %>
-<%= check_box_tag("song_del") %>
-<%= label_tag("song_del", "Remove this association") %>
-
-<br>
-  </p>
-  <p>
-    <%= f.submit %>
-  </p>
-
-
-<% end %>
-------------------------------------------
-<% end %>
 
 
 <div class="infosection" >
@@ -130,8 +80,8 @@
   <% @performer.concerts.each do |concert| %>
     <tr>
       <td><%= concert.cdate %></td>
-      <td><%= concert.venue.vname %></td>
-      <td><%= link_to 'Show', concert_path(concert) %></td>
+      <td><%= link_to concert.venue.vname, venue_path(concert.venue) %></td>
+      <td><%= link_to 'Show Concert', concert_path(concert) %></td>
     </tr>  
   <% end %>
 </table>
