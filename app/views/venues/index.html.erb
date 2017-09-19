@@ -1,21 +1,23 @@
 <h1>Listing Venues</h1>
+<div class="indentation">
 <%= link_to 'New venue', new_venue_path %>
+</div>
 <table>
   <tr>
     <th>Name</th>
     <th>Address</th>
     <th>City</th>
     <th>Country</th>
-    <th colspan="4"></th>
+    <th colspan="3"></th>
   </tr>
  
   <% @venues.each do |venue| %>
     <tr>
-      <td><%= venue.vname %></td>
+      <td><%= link_to venue.vname, venue_path(venue) %></td>
       <td><%= venue.address %></td>
       <td><%= venue.city %></td>
       <td><%= venue.country %></td>
-      <td><%= link_to 'Show', venue_path(venue) %></td>
+
       <td><%= link_to 'Edit', edit_venue_path(venue) %></td>
       <td><%= link_to 'Manage Link', managelink_venue_path(venue) %></td>
       <td><%= link_to 'Destroy', venue_path(venue),
@@ -25,5 +27,3 @@
   <% end %>
 </table>
 
-
-<%#= link_to 'Back', welcome_index_path %>

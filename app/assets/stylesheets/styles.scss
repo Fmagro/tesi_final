@@ -1,6 +1,9 @@
 // Place all the styles related to the common styles  here.
-
-body {
+html {
+     min-height:100%;
+     position:relative;
+}
+html,body {
 /*    background-image: url('/assets/concert_home.jpeg');
     background-size: cover;    
     background-color: #494a4f;*/
@@ -10,6 +13,7 @@ body {
 
 div.container {
     width: 100%;
+    margin-bottom:2.7vh;
 /*    border: 2px solid #273a61;*/
 }
 
@@ -28,7 +32,11 @@ footer {
     height: 2.7vh;
     color: #B47746;
     background-color: #273a61;
-    clear: left;
+    position:absolute;
+    bottom:0;
+    left:0;
+    right:0;
+    /*clear: left;*/
     text-align: center;
     text-shadow: 1px 1px 2px black;
 
@@ -98,7 +106,7 @@ h1 {
     background-size: cover;
     background-color:rgba(255,255,255,0.5);*/
 
-    min-height: 66vh; 
+    min-height: 68vh; 
     padding: 1em;
     overflow: auto;
 }

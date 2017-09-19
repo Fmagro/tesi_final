@@ -11,11 +11,14 @@
     <% @performer.bands.each do |band| %> 
       <%= f.fields_for :bands, band do |ff| %>
       <h4><%=band.individual.pname%> </h4>
-      <h5> Joining date </h5>
+      <p>
+      <%= ff.label :joining, "Joining date:" %><br>
       <%= ff.date_field :joining %><br> 
-      <h5> Leaving date </h5>
+      </p>
+      <p>
+      <%= ff.label :leaving, "Leaving date:" %><br>
       <%= ff.date_field :leaving %><br> 
-
+      </p>
 
      <% end %>
    <% end %>
