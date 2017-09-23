@@ -1,8 +1,5 @@
 // Place all the styles related to the common styles  here.
-html {
-     min-height:100%;
-     position:relative;
-}
+
 html,body {
 /*    background-image: url('/assets/concert_home.jpeg');
     background-size: cover;    
@@ -13,7 +10,7 @@ html,body {
 
 div.container {
     width: 100%;
-    margin-bottom:2.7vh;
+    /*margin-bottom:2.7vh;*/
 /*    border: 2px solid #273a61;*/
 }
 
@@ -32,11 +29,7 @@ footer {
     height: 2.7vh;
     color: #B47746;
     background-color: #273a61;
-    position:absolute;
-    bottom:0;
-    left:0;
-    right:0;
-    /*clear: left;*/
+    clear: both;
     text-align: center;
     text-shadow: 1px 1px 2px black;
 
