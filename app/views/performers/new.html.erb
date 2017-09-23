@@ -16,11 +16,11 @@
           <%= ff.select :individual_id, Performer.where(:type => "Individual").collect{ |p| [p.pname, p.id] } %><br>
         </p>
         <p>
-          <h5> Joining date </h5>
+          <%= ff.label :joining, "Joining date:" %><br>
           <%= ff.date_field :joining %>
         </p>
         <p>
-          <h5> Leaving date </h5>
+          <%= ff.label :leaving, "Leaving date:" %><br>
           <%= ff.date_field :leaving %>
         </p>
          <% end %>   
@@ -36,9 +36,9 @@
  
 <div class=nextsection >
   <p> GUIDED DATA ENTRY </p>
-  <%= link_to "New song", new_song_path %> | 
-  <%= link_to "New individual", new_individual_path %> | 
-  <%= link_to "New group", new_group_path %>
+  <p><%= link_to "New song", new_song_path %></p>
+  <p><%= link_to "New individual", new_individual_path %> | 
+  <%= link_to "New group", new_group_path %></p>
 </div>
 
 <div class="afterinfosection">

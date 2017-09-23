@@ -1,7 +1,8 @@
 <h1>Listing Performers</h1>
-
+<div class="indentation">
 <%= link_to 'New individual', new_individual_path %>
  | <%= link_to 'New group', new_group_path %>
+</div>
 <table>
   <tr>
     <th>Name</th>
@@ -11,9 +12,8 @@
  
   <% @performers.each do |performer| %>
     <tr>
-      <td><%= performer.pname %></td>
+      <td><%= link_to performer.pname, performer_path(performer) %></td>
       <td><%= performer.type %></td>
-      <td><%= link_to 'Show', performer_path(performer) %></td>
       <td><%= link_to 'Edit', edit_performer_path(performer) %></td>
       <td><%= link_to 'Manage link', managelink_performer_path(performer) %></td>
       <td><%= link_to 'Destroy', performer_path(performer),

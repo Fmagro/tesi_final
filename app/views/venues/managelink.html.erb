@@ -1,6 +1,6 @@
 <%= render 'shared', shared: @venue %>
 <div class="infosection">
-<h2>Concerts held here</h2>
+<h2>Concerts held here:</h2>
   <table>
   <tr>
     <th>Performers</th>
@@ -13,22 +13,21 @@
         <table>
           <% concert.performers.each do |perf| %>
           <tr>
-          <td><%= perf.pname %> </td>
+          <td><%= link_to perf.pname, managelink_performer_path(perf) %> </td>
           </tr>
           <% end %>
         </table>
       </td>
       <td><%= concert.cdate %></td>
-      <td><%= link_to "Show", concert_path(concert) %></td>
-      <td><%#= link_to "Manage link", manage_link_concert_path(concert) %></td>
+      <td><%= link_to "Show Concert", concert_path(concert) %></td>
+      <td><%= link_to "Concert Manage link", managelink_concert_path(concert) %></td>
     </tr>  
   <% end %>
 </table>
 </div>
 
 <div class="afterinfosection">
-<%= link_to 'Edit', edit_venue_path(@venue) %> |
 <%= link_to 'Add another venue', new_venue_path %> |
-<%= link_to 'Concert index', concerts_path %> |
-<%= link_to 'Back', venues_path %>
+<%= link_to 'Edit venue', edit_venue_path(@venue) %> |
+<%= link_to 'Venue index', venues_path %>
 </div>

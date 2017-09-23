@@ -8,14 +8,23 @@
 <%= render 'concertinfo', f: f %>
 
 <h2>Setlist</h2>
+  <table>
+    <tr>
+      <th>Position</th>
+      <th>Song</th>
+    </tr>
+ 
   <% @concert.performances.each do |performance| %> 
-     <%= f.fields_for :performances, performance do |ff| %>
-     <%= ff.number_field :position %> 
 
-      <%=performance.song.title%>
-<br>
+     <%= f.fields_for :performances, performance do |ff| %>
+     <tr>
+       <td><%= ff.number_field :position, :required => 'required'%></td> 
+
+       <td><%=performance.song.title%></td>
+     </tr>
      <% end %>
    <% end %>
+  </table>
   <p>
     <%= f.submit %>
   </p>
@@ -23,5 +32,6 @@
 <% end %>
 
 <div class="afterinfosection">
-<%= link_to 'Concert index', concerts_path %>
+<%= link_to 'Concert index', concerts_path %> | 
+<%= link_to 'Concert Manage link', managelink_concert_path(@concert) %>
 </div>

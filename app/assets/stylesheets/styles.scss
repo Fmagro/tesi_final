@@ -1,6 +1,6 @@
 // Place all the styles related to the common styles  here.
 
-body {
+html,body {
 /*    background-image: url('/assets/concert_home.jpeg');
     background-size: cover;    
     background-color: #494a4f;*/
@@ -10,6 +10,7 @@ body {
 
 div.container {
     width: 100%;
+    /*margin-bottom:2.7vh;*/
 /*    border: 2px solid #273a61;*/
 }
 
@@ -28,7 +29,7 @@ footer {
     height: 2.7vh;
     color: #B47746;
     background-color: #273a61;
-    clear: left;
+    clear: both;
     text-align: center;
     text-shadow: 1px 1px 2px black;
 
@@ -98,7 +99,7 @@ h1 {
     background-size: cover;
     background-color:rgba(255,255,255,0.5);*/
 
-    min-height: 66vh; 
+    min-height: 68vh; 
     padding: 1em;
     overflow: auto;
 }
@@ -109,7 +110,7 @@ h1 {
     width: 40vw;
     min-height: 20vh;
     background-color: #e4ebf6;*/
-    float: left;
+    /*float: left;*/
     /*display: inline-block;*/
     margin: 0.8em;
     min-width: 42vw;
@@ -141,7 +142,7 @@ h1 {
 }
 
 #error_explanation{
-    display: inline-block;
+    /*display: inline-block;*/
     border: 3px solid #FF0004;
     width: 40vw;
     min-height: 20vh;
@@ -209,10 +210,34 @@ h1 {
 
 
 }
+
+#nextmap {
+/*    display: inline-block;
+    border: 1px solid #273a61;
+    width: 40vw;
+    min-height: 20vh;
+    background-color: #e4ebf6;*/
+    float: left;
+    /*display: inline-block;*/
+    margin: 0.8em;
+    min-width: 42vw;
+    padding: 0.8em;
+    height: 43vh;
+    border: 1px solid #273a61;
+    box-shadow:10px 10px 5px grey;
+
+}
+
 table {
-    margin-left:0.4em;
+    margin-left:0.5em;
+    padding-top:0.3em;
 }
 
 table th {
     text-align: left;
 }
+
+table td {
+    padding-right: 0.5em;
+}
+
