@@ -23,11 +23,31 @@
           <li><%= link_to 'Song', songfilter_songs_path %></li>
           <li><%= link_to 'Performers', performerfilter_performers_path %></li>
           <li>  <%= link_to 'Venue', venuefilter_venues_path %><br></li>
-          <li><%= link_to 'Admin area', admin_index_path %></li>
+
+          <% if logged_in? %>          
+            <li class="rightelem"><%= link_to 'Log out', logout_path, method: :delete %></li>
+            <li class="rightelem"><%= link_to 'Profile', user_path(@current_user) %></li>
+            <li class="lastchild"><%= link_to 'Admin area', admin_index_path  %></li>
+          <% else %>  
+            <li class="rightelem"><%= link_to 'Sign up', new_user_path %></li>
+            <li class="lastchild"><%= link_to 'Log in', login_path %></li>
+          <% end %>
+
       </ul>
     </nav>
 
-    <div class="content"> 
+    <div class="content">
+
+        <% flash.each do |message_type, message| %>
+        <div class="flash_error">
+        <ul>
+          <li><%= message %></li>
+        </ul> </div>
+        <% end %> 
+ 
+
+        <div class="afterinfosection"></div>
+
       <%= yield %>
     </div> 
 

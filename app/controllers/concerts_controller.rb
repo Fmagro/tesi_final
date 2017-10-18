@@ -1,5 +1,6 @@
 class ConcertsController < ApplicationController
-    http_basic_authenticate_with name:  "admin", password: "12345", except: [:show, :concertfilter, :concertsearch]
+
+    before_action :admin_user, except: [:show, :concertfilter, :concertsearch]
 
   def index
     @concerts = Concert.all

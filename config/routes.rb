@@ -1,8 +1,15 @@
 Rails.application.routes.draw do
-  get 'admin/index'
+
 
   get 'welcome/index'
   root 'welcome#index'
+
+  get    '/login',   to: 'sessions#new'
+  post   '/login',   to: 'sessions#create'
+  delete '/logout',  to: 'sessions#destroy'
+
+  get 'admin/index'
+
   
   resources :concerts do
 
@@ -58,6 +65,12 @@ Rails.application.routes.draw do
       get 'venuesearch'
     end
   end 
-  
+
+  resources :users do
+    member do
+      patch 'addfavourite'
+      patch 'delfavourite'
+    end
+  end
  
 end

@@ -1,0 +1,43 @@
+<h1>User</h1>
+
+
+
+
+<div class="infosection">
+<p>
+  <strong>Email:</strong>
+  <%= @user.email %>
+</p>
+</div>
+
+<div class="infosection">
+<table>
+  <tr>
+    <th>Performers</th>
+    <th>Date</th>
+    <th>Venue</th>
+    <th colspan="2"></th>
+  </tr>
+ 
+  <% @user.concerts.each do |concert| %>
+    <tr>
+      <td>
+        <table>
+          <% concert.performers.first(3).each do |p| %>
+            <tr>  <td> <%= link_to p.pname, performer_path(p) %> </td> </tr> 
+          <% end %>
+          <% if concert.performers.count > 3 %>
+            <tr>  <td> ... </td> </tr>  
+          <% end %>
+        </table> 
+      </td>
+      <td><%= concert.cdate %></td>      
+      <td><%= link_to concert.venue.vname, venue_path(concert.venue) %></td>
+      <td><%= link_to 'Show', concert_path(concert) %></td>
+      
+      <td><%= link_to 'Delete Favourite', delfavourite_user_path(current_user, del_conc: concert.id), method: :patch %></td>
+    </tr>
+  <% end %>
+</table>
+</div>
+

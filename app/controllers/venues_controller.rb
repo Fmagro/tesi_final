@@ -1,6 +1,6 @@
 class VenuesController < ApplicationController
 
-  http_basic_authenticate_with name: "admin", password: "12345", except: [:show, :venuesearch, :venuefilter]
+  before_action :admin_user, except: [:show, :venuesearch, :venuefilter]
   def index
     @venues = Venue.all
   end

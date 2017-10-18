@@ -1,5 +1,5 @@
 class PerformancesController < ApplicationController
-  http_basic_authenticate_with name:  "admin", password: "12345", except: [:show]
+  before_action :admin_user, except: [:show]
 
   def index
     @performances = Performance.all

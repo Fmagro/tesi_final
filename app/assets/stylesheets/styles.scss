@@ -45,7 +45,7 @@ nav ul {
     padding: 0;
     overflow: hidden;
     background-color: #B47746;
-    border: 1px solid #494a4f;
+    border-bottom: 1px solid #494a4f;
 }
 
 nav li {
@@ -53,12 +53,18 @@ nav li {
     border-right:1px solid #494a4f;
 }
 
-nav li:last-child {
+nav li.rightelem {
+    /*border-left:1px solid #494a4f;*/
     float:right
     
 
 }
+nav li.lastchild {
+    border-left:1px solid #494a4f;
+    float:right
+    
 
+}
 nav li a {
     display: block;
     color: #273a61;
@@ -157,6 +163,20 @@ h1 {
 }
 
 
+.flash_error{
+    /*display: inline-block;*/
+    border: 3px solid #FF0004;
+    width: 40vw;
+    /*min-height: 5vh;*/
+    background-color: #e4ebf6;
+    margin-left: 0.8em;
+    float: left;
+    padding: 0.8em;    
+    min-width: 42vw;
+    
+    min-height: 5em;
+    
+}
 .nextsection {
 /*    display: inline-block;
     border: 1px solid #273a61;
@@ -207,10 +227,15 @@ h1 {
     margin-left: 0.8em;
 
     /*padding: 0.8em;*/
-
-
 }
 
+
+.floatright {
+ 
+    margin-right: 0.8em;
+    float: right;
+    /*padding: 0.8em;*/
+}
 #nextmap {
 /*    display: inline-block;
     border: 1px solid #273a61;
