@@ -12,8 +12,11 @@
     <tr>
       <td>
         <table>
-          <% concert.performers.each do |p| %>
+          <% concert.performers.first(3).each do |p| %>
             <tr>  <td> <%= link_to p.pname, managelink_performer_path(p) %> </td> </tr> 
+          <% end %>
+          <% if concert.performers.count > 3 %>
+            <tr>  <td> ... </td> </tr>  
           <% end %>
         </table> 
       </td>

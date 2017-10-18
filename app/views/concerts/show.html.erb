@@ -1,5 +1,10 @@
-<h1>Concert</h1>
 
+<% if logged_in? %>
+<div class="floatright"> 
+  <%= link_to 'Add to Favourites', addfavourite_user_path(@current_user, fav_conc: @concert.id), method: :patch %>  
+</div> 
+<% end %>
+<h1>Concert</h1>
 <div class="infosection">
   <p>
     <h2>Date:</h2>

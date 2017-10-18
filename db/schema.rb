@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170807103340) do
+ActiveRecord::Schema.define(version: 20171015140839) do
 
   create_table "bands", force: :cascade do |t|
     t.date     "joining"
@@ -34,6 +34,11 @@ ActiveRecord::Schema.define(version: 20170807103340) do
   create_table "concerts_performers", id: false, force: :cascade do |t|
     t.integer "concert_id",   null: false
     t.integer "performer_id", null: false
+  end
+
+  create_table "concerts_users", id: false, force: :cascade do |t|
+    t.integer "concert_id", null: false
+    t.integer "user_id",    null: false
   end
 
   create_table "performances", force: :cascade do |t|
@@ -65,6 +70,15 @@ ActiveRecord::Schema.define(version: 20170807103340) do
     t.string   "ytid"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string   "email"
+    t.string   "password_digest"
+    t.boolean  "isadmin"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
   end
 
   create_table "venues", force: :cascade do |t|

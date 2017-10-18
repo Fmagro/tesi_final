@@ -1,7 +1,7 @@
 class Concert < ApplicationRecord
 
   has_and_belongs_to_many :performers, inverse_of: :concerts 
-
+  has_and_belongs_to_many :users, inverse_of: :concerts
   has_many :performances, inverse_of: :concert,      dependent: :destroy
   has_many :songs, :through => :performances
   accepts_nested_attributes_for :performances
