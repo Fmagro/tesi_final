@@ -51,6 +51,8 @@ class BandsController < ApplicationController
     @band = Band.find(params[:id])
     if @band.group.bands.length >1 
       @band.destroy
+    else
+       flash[:error] = 'Removal of the last member of the group is not allowed'
     end
     redirect_to managelink_performer_path(@band.group)
   end

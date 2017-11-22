@@ -37,13 +37,13 @@ class Concert < ApplicationRecord
 
     def songmin
       if self.performances.length < 1
-         errors.add(:concert, "must have at least one song")
+        flash.now[:error] = 'The concert must have at least one song'
       end
     end
 
     def performermin
       if self.performers.length < 1
-         errors.add(:concert, "must have at least one performer")
+        flash.now[:error] = 'The concert must have at least one performer'
       end
     end
 
