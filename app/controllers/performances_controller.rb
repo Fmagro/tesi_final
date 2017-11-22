@@ -50,6 +50,8 @@ class PerformancesController < ApplicationController
     @performance = Performance.find(params[:id])
     if @performance.concert.performances.length > 1
       @performance.destroy
+    else
+      flash[:error] = 'Removal of the last performance associated to the concert is not allowed'
     end
     redirect_to managelink_concert_path(@performance.concert)
   end
@@ -69,7 +71,9 @@ class PerformancesController < ApplicationController
     if params[:artist_add]
       @performer = Performer.where(:id  => params[:artist_to_add])
       if  @performance.performers.by_id(params[:artist_to_add]).count ==0
-        @performance.performers<< @performer 
+        @performance.performers<< @performer
+      else
+        flash[:error]='No duplicates allowed' 
       end
     end
     if (params[:artist_del])
@@ -77,7 +81,7 @@ class PerformancesController < ApplicationController
         @performerd = Performer.where(:id  => params[:artist_to_delete])
         @performance.performers.delete(@performerd)
       else
-       # errors.add(:concert_id, "Cannot delete: there must be at least one associated performer to the performance")
+        flash[:error]='Cannot delete: there must be at least one performer associated to the performance'
       end
     end
     redirect_to manageperformer_concert_performance_path(@concert,@performance) 

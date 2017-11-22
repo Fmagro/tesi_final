@@ -24,9 +24,14 @@ class ConcertsController < ApplicationController
     if (params[:v_name_add].present? && params[:v_city_add].present? && params[:v_country_add].present?)
       @venue = Venue.where(:vname  => params[:v_name_add]).where(:city  => params[:v_city_add]).where(:country  => params[:v_country_add]).first
       if not @venue.nil?
-        @concert.venue = @venue 
+        @concert.venue = @venue
+      else
+        flash.now[:error] = 'Venue not found'   
       end
+    else
+      flash.now[:error] = 'One or more search parameters are missing'  
     end
+
     @performer = Performer.where(:id  => params[:artist_to_add])
       #@venue= @concert.venue
     @concert.performers << @performer  
@@ -66,7 +71,9 @@ class ConcertsController < ApplicationController
     if params[:artist_add]
       @performer = Performer.where(:id  => params[:artist_to_add])
       if  @concert.performers.by_id(params[:artist_to_add]).count ==0
-        @concert.performers<< @performer        
+        @concert.performers<< @performer
+      else
+        flash[:error] = 'No duplicates allowed'         
       end 
 
     end
@@ -76,6 +83,8 @@ class ConcertsController < ApplicationController
         @performerd = Performer.where(:id  => params[:artist_to_delete]) 
      
         @concert.performers.delete(@performerd)
+      else
+        flash[:error] = 'Removal of the last performer associated to the concert is not allowed'
         
       end
 
@@ -90,7 +99,11 @@ class ConcertsController < ApplicationController
       @venue = Venue.where(:vname  => params[:v_name_add]).where(:city  => params[:v_city_add]).where(:country  => params[:v_country_add]).first
       if not @venue.nil?
         @concert.venue = @venue
+      else
+        flash.now[:error] = 'Venue must exist'     
       end
+    else
+      flash.now[:error] = 'One or more search parameters are missing'     
     end
     if ((not @venue.nil?) && (@concert.update_attribute(:venue_id,@venue.id)))
       redirect_to managelink_concert_path(@concert)
