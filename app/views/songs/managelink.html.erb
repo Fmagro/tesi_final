@@ -7,13 +7,12 @@
     <th>Name</th>
     <th colspan="1"></th>
   </tr>
-  <% @song.performances.each do |performance| %>
-    <% performance.performers.each do |performer| %>
+  <% @song.performances.select('*').joins(:performers).group("performers.id").each do |p| %>
     <tr>
-      <td><%= link_to performer.pname, performer_path(performer) %></td>
-      <td><%= link_to 'Performer Manage Link', managelink_performer_path(performer) %></td>
+      <td><%= link_to p.pname, performer_path(p) %></td>
+      <td><%= link_to 'Performer Manage Link', managelink_performer_path(p) %></td>
     </tr> 
-    <% end %> 
+
   <% end %>
   </table>
 </div>
